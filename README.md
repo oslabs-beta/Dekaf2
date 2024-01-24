@@ -18,6 +18,8 @@ Apache Kafka Custom Error Handling Tool
 
 #4: STARTING TEST SUITE FOR DEV ENVIROMENT
 
+- [ ] Run "npm run test:watch". This should run the test suite and re-run the test everytime there is a new modification in any of the files. This way you can make sure the code is not broking during development.
+
 #5: RUNNING THE SERVICES
 
 ### CONNECT TO KAFKA CLUSTERS
