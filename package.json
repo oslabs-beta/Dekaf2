@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server/infra/server.js",
+    "dev": "nodemon server/infra/server.js & next dev",
     "dev services:up": "docker compose -f server/infra/compose.yaml up",
     "dev services:down": "docker compose -f server/infra/compose.yaml down",
     "dev services:stop": "docker compose -f server/infra/compose.yaml stop",
@@ -16,7 +16,13 @@
   "dependencies": {
     "dotenv": "^16.4.0",
     "express": "^4.18.2",
+
+    "next": "^14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+
     "kafkajs": "^2.2.4"
+
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
