@@ -26,7 +26,7 @@ class KafkaProducer {
           {
             key: this.msgKey || 'No MsgKey Provided',
             value: this.msgValue
-              ? JSON.stringify({ test: this.msgValue })
+              ? JSON.stringify(this.msgValue)
               : JSON.stringify({
                   test: 'No MsgValue Provided',
                 }),
