@@ -5,7 +5,7 @@ import {
   ITopics,
 } from "../KafkaInterfaces";
 
-import IConfluentAPI from "./IRequests";
+import IConfluentAPI from "./IConfluentAPI";
 
 class ConfluentAPI implements IConfluentAPI {
   authToken: any;

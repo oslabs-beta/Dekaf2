@@ -1,4 +1,4 @@
-import IConfluentAPI from "../shared/requests/IRequests";
+import IConfluentAPI from "../shared/requests/IConfluentAPI";
 
 const ConfluentAPI = require("../shared/requests/ConfluentAPI");
 const token =
