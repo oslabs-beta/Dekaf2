@@ -1,36 +1,18 @@
 const kafka = require('./kafka');
+const KafkaProducer = require('./Classes/producer');
 require('dotenv').config();
 
-console.log('this is env', process.env);
+//producer takes in (topic, msgKey, msgValue)
+const producer1 = new KafkaProducer();
+producer1.setup().then(() => producer1.send());
 
-const main = async () => {
-  const producer = await kafka.producer();
-  await producer.connect();
+const producerNumIncrementor = new KafkaProducer(null, 'numIncrementor', 1);
+producerNumIncrementor.setup().then(() =>
+  setInterval(() => {
+    producerNumIncrementor.send();
+    producerNumIncrementor.msgValue++;
+  }, 2000)
+);
 
-  try {
-    const responses = await producer.send({
-      topic: 'topic_1', //process.env.TOPIC,
-      messages: [
-        {
-          // Name of the published package as key, to make sure that we process events in order
-          key: 'test-event-name', //event.name,
-
-          // The message value is just bytes to Kafka, so we need to serialize our JavaScript
-          // object to a JSON string. Other serialization methods like Avro are available.
-          value: JSON.stringify({
-            test: 'companion 1',
-          }),
-        },
-      ],
-    });
-
-    console.log('Published message', { responses });
-  } catch (error) {
-    console.error('Error publishing message', error);
-  }
-};
-
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+const producer3 = new KafkaProducer(null, 'hello', 'world');
+producer3.setup().then(() => producer3.send());
