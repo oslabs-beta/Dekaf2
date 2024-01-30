@@ -1,35 +1,60 @@
 const kafka = require('./kafka')
 
-const consumer = kafka.consumer({
-  groupId: 'test_group'
-})
+class Consumer {
 
-const main = async () => {
-  await consumer.connect()
+  constructor(groupId){
+    this.groupId = groupId;
 
-  await consumer.subscribe({
-    topic: 'topic_1',
-    fromBeginning: true
-  })
+    this.consumer = kafka.consumer({
+      groupId: this.groupId
+    })
+  }
+  
 
-  await consumer.run({
-    eachMessage: async ({ topic, partition, message }) => {
-      console.log('Received message', {
-        topic,
-        partition,
-        key: message.key.toString(),
-        value: message.value.toString()
+    async connect(){
+      await this.consumer.connect();
+    } 
+
+    async subscribe(topic){
+
+      await this.consumer.subscribe({
+        //topic: 'topic_1',
+        topic: topic,
+        fromBeginning: true
       })
+
     }
-  })
+    
+    async run(){
+
+      await this.consumer.run({
+        eachMessage: async ({ topic, partition, message }) => {
+          console.log('Received message', {
+            topic,
+            partition,
+            key: message.key.toString(),
+            value: message.value.toString()
+          })
+        }
+      })
+
+    }
+    
+
 }
 
-main().catch(async error => {
-  console.error(error)
-  try {
-    await consumer.disconnect()
-  } catch (e) {
-    console.error('Failed to gracefully disconnect consumer', e)
-  }
-  process.exit(1)
-})
+const consumer = new Consumer('test_group_1');
+consumer.connect();
+consumer.subscribe('topic_1');
+consumer.run();
+
+// main().catch(async error => {
+//   console.error(error)
+//   try {
+//     await consumer.disconnect()
+//   } catch (e) {
+//     console.error('Failed to gracefully disconnect consumer', e)
+//   }
+//   process.exit(1)
+// })
+
