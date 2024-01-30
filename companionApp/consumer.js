@@ -4,29 +4,41 @@ class Consumer {
 
   constructor(groupId){
     this.groupId = groupId;
-
     this.consumer = kafka.consumer({
       groupId: this.groupId
     })
   }
-  
 
-    async connect(){
+
+  async connect(){
+    try {
       await this.consumer.connect();
-    } 
+    }
+    catch (error) {
+      console.error('Error connecting to consumer', error);
+      throw error;
+    }
+  } 
 
-    async subscribe(topic){
+  async subscribe(topic){
 
+    try {
       await this.consumer.subscribe({
         //topic: 'topic_1',
         topic: topic,
         fromBeginning: true
       })
-
     }
-    
-    async run(){
+    catch (error) {
+      console.error('Error subscribing to consumer', error);
+      throw error;
+    }
 
+  }
+  
+  async run(){
+
+    try {
       await this.consumer.run({
         eachMessage: async ({ topic, partition, message }) => {
           console.log('Received message', {
@@ -37,16 +49,23 @@ class Consumer {
           })
         }
       })
-
     }
+    catch (error) {
+      console.error('Error consuming messages', error);
+      throw error;
+    }
+
+  }
     
 
 }
 
-const consumer = new Consumer('test_group_1');
-consumer.connect();
-consumer.subscribe('topic_1');
-consumer.run();
+module.exports = Consumer;
+
+// const consumer = new Consumer('test_group_1');
+// consumer.connect();
+// consumer.subscribe('topic_1');
+// consumer.run();
 
 // main().catch(async error => {
 //   console.error(error)
