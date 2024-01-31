@@ -35,23 +35,54 @@ interface ICluster {
   };
 }
 
-interface IClusterDTO {
-  clusterId: string;
-}
+interface IClusterDTO {}
 
 interface ITopics {
-  clusterId: string;
-}
-interface ITopicsDTO {
-  clusterId: string;
+  kind: string;
+  metadata: {
+    self: string;
+    resource_name: string;
+  };
+  cluster_id: string;
+  topic_name: string;
+  is_internal: boolean;
+  replication_factor: number;
+  partitions_count: number;
+  partitions: {
+    related: string;
+  };
+  configs: {
+    related: string;
+  };
+  partition_reassignments: {
+    related: string;
+  };
 }
 
-interface IMessages {
-  clusterId: string;
+interface ITopicsDTO {}
+
+interface IPartition {
+  kind: string;
+  metadata: {
+    self: string;
+    resource_name: string;
+  };
+  cluster_id: string;
+  topic_name: string;
+  partition_id: number;
+  leader: {
+    related: string;
+  };
+  replicas: {
+    related: string;
+  };
+  reassignment: {
+    related: string;
+  };
 }
-interface IMessagesDTO {
-  clusterId: string;
-}
+
+interface IMessages {}
+interface IMessagesDTO {}
 
 export { ICluster, ITopics, IMessages, IEnvironments };
 
