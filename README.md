@@ -7,10 +7,11 @@ Apache Kafka Custom Error Handling Tool
 #1: INSTALLING DEPENDENCIES - Open the terminal and run 'npm install' to make sure you have all necessary dependencies;
 
 #2: STARTING CONTAINER
+For now we only need to run "docker compose -f server/infra/compose.yaml up"
 
-- [ ] If you're in your local machine, make sure you have the Docker Daemon installed;
+<!-- - [ ] If you're in your local machine, make sure you have the Docker Daemon installed;
 - [ ] Make sure your Docker Daemon is running on you machine;
-- [ ] Run 'npm run dev services:up', this should start up the container;
+- [ ] Run 'npm run dev services:up', this should start up the container; -->
 
 #3: STARTING SERVER
 
