@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server/infra/server.js & next dev",
+    "dev": "nodemon server/infra/server.js",
     "dev services:up": "docker compose -f server/infra/compose.yaml up",
     "dev services:down": "docker compose -f server/infra/compose.yaml down",
     "dev services:stop": "docker compose -f server/infra/compose.yaml stop",

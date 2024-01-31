@@ -1,3 +1,4 @@
 node_modules
-.next
+client/.next
+client/node_modules
 .env
