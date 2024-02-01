@@ -1,7 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 const statusRouter = require("../routes/statusRoutes");
-
+const kafkaRouter = require("../routes/kafkaRoutes");
 const app = express();
 
 //GLOBAL MIDDLEWARES
@@ -27,6 +27,8 @@ app.get("/", (req, res) => {
 
 //ROUTERS
 app.use("/api/v1/status", statusRouter); // Overall application metrics and status
+
+app.use("/api/v1/kafka", kafkaRouter); // Overall application metrics and status
 
 //GLOBAL ERROR HANDLER
 app.use((err, req, res, next) => {

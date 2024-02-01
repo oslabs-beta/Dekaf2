@@ -6,6 +6,8 @@ services:
     restart: always
     ports:
       - 3000:3000
+    working_dir: /app
     volumes:
-      - .:/usr/app
+      - ../..:/app
       - .:/../../.env
+    command: npm run dev
