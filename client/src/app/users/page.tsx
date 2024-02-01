@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from '../components/NavBar';
 
 const UsersPage = async () => {
 
@@ -8,7 +9,11 @@ const UsersPage = async () => {
     // console.log("value here ", value);
 
     return (
-        <div>UsersPage</div>
+        <div className='text-black'>
+            UsersPage
+            <NavBar/>
+            </div>
+        
     )
 
 }
