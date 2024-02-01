@@ -7,8 +7,8 @@ const VerticalNavBar = () => {
         <div> 
             <ul className=" h-screen flex-col flex text-black rounded border-2 border-solid border-red-600">
               <li className="basis-1/3">
-                <Link href="/overview">
-                  <p>Overview</p>
+                <Link href= "/overview">
+                  <p>SENT</p>
                 </Link>
               </li>
               
