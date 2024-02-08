@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import VerticalNavBar from './VerticalNavBar';
-
+import CounterComponent from './CounterComponent';
 const NavBar = () => {
 
     return (
@@ -84,6 +84,9 @@ const NavBar = () => {
       </ul>
       <div className='flex rounded border-2 border-solid border-teal-500'>
         <VerticalNavBar/>
+        </div>
+        <div >
+        <CounterComponent/>
         </div>
       </div> 
 
