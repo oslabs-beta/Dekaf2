@@ -5,60 +5,6 @@ import CounterComponent from './CounterComponent';
 const NavBar = () => {
 
     return (
-        // <div> 
-        //     <ul className=" flex-row flex text-black rounded border-2 border-solid border-black">
-        //       <li className="basis-1/3">
-        //         <Link href="/">
-        //           <p>Dekaf</p>
-        //         </Link>
-        //       </li>
-              
-        //       <li className="basis-1/3">
-        //         <Link href="/users">
-        //           <p>Another Link</p>
-        //         </Link>
-        //       </li>
-
-        //       <li className="basis-1/3">
-        //         <Link href="/services">
-        //           <p>Settings</p>
-        //         </Link>
-        //       </li>
-        //     </ul>
-        //     <div className='flex rounded border-2 border-solid border-teal-500'>
-        //         <VerticalNavBar/>
-        //     </div>
-            
-        // </div>
-
-
-    // <div>
-    //     <div> 
-    //     <ul className="flex flex-row justify-between items-center text-black rounded-md border-2 border-solid border-black bg-gray-200 p-4 shadow-md">
-    //         <li className="flex-1">
-    //         <Link href="/">
-    //             <p className="text-center block py-2 px-4 rounded-md hover:bg-blue-500 hover:text-white">Dekaf</p>
-    //         </Link>
-    //         </li>
-            
-    //         <li className="flex-1">
-    //         <Link href="/users">
-    //             <p className="text-center block py-2 px-4 rounded-md bg-blue-500 text-white font-semibold hover:bg-blue-600 cursor-pointer transition-colors duration-300">Another Link</p>
-    //         </Link>
-    //         </li>
-
-    //         <li className="flex-1">
-    //         <Link href="/settings">
-    //             <p className="text-center block py-2 px-4 rounded-md bg-blue-500 text-white font-semibold hover:bg-blue-600 cursor-pointer transition-colors duration-300">Settings</p>
-    //         </Link>
-    //         </li>
-    //     </ul>
-    //     </div>
-        
-    //     <div className='flex rounded border-2 border-solid border-teal-500'>
-    //     <VerticalNavBar/>
-    //     </div>
-    // </div>
 
 
  <div className="hidden w-full md:block md:w-auto " id="navbar-default">
