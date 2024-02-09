@@ -4,26 +4,30 @@ import React from 'react';
 const VerticalNavBar = () => {
 
     return (
-        <div> 
-            <ul className=" h-screen flex-col flex text-black rounded border-2 border-solid border-red-600">
-              <li className="basis-1/3">
-                <Link href="/overview">
-                  <p>Overview</p>
-                </Link>
-              </li>
-              
-              <li className="basis-1/3">
-                <Link href="/">
-                  <p>Errors</p>
-                </Link>
-              </li>   
-              <li className="basis-1/3">
-                <Link href="/">
-                  <p>Actions</p>
-                </Link>
-              </li>
-            </ul>
-        </div>
+   
+
+        <div className='h-screen flex justify-start '>
+    <ul className="flex flex-col gap-4 text-black rounded border-2 border-solid border-red-600 p-4 bg-gray-200">
+      <li>
+        <Link href="/overview">
+          <p className="block py-2 px-4 rounded hover:bg-red-600 hover:text-white">Overview</p>
+        </Link>
+      </li>
+      <li>
+        <Link href="/errors">
+          <p className="block py-2 px-4 rounded hover:bg-red-600 hover:text-white">Errors</p>
+        </Link>
+      </li>
+      <li>
+        <Link href="/actions">
+          <p className="block py-2 px-4 rounded hover:bg-red-600 hover:text-white">Actions</p>
+        </Link>
+      </li>
+    </ul>
+  </div>
+
+
+
 
     )
 
