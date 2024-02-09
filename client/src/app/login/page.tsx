@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import Image from 'next/image'
 import LoginContainer from '../components/LoginContainer';
 import VideoBackground from '../components/VideoBackground';
@@ -15,10 +15,10 @@ const LoginPage = () => {
         <div className='overflow-hidden'> 
             <Image
               className='absolute'
-              src='/login-background-static.png'
+              src='/login-background2.jpg'
             //   width={500}
             //   height={500}
-              alt="Picture of the author"
+              alt="Cannot load Image"
               fill={true}
               sizes='100vw'
             //   style={styles.backgroundImg}
@@ -33,20 +33,20 @@ const LoginPage = () => {
 }
 
 export default LoginPage
-'use client'; //nextjs compiler automatically places this component into javascript bundle
-import Link from 'next/link';
-import React from 'react';
-//import styles from './ProductCard.module.css';
+// 'use client'; //nextjs compiler automatically places this component into javascript bundle
+// import Link from 'next/link';
+// import React from 'react';
+// //import styles from './ProductCard.module.css';
 
-const Login = () => {
+// const Login = () => {
 
-    return (
-        <div className='p-5 my-5 bg-sky-400 text-white'> 
-            <button onClick={ () => console.log('Clicked')}>LoginPage</button>
-            <Link href='/users' className='text-black'> Users </Link>
-        </div>
-    )
+//     return (
+//         <div className='p-5 my-5 bg-sky-400 text-white'> 
+//             <button onClick={ () => console.log('Clicked')}>LoginPage</button>
+//             <Link href='/users' className='text-black'> Users </Link>
+//         </div>
+//     )
 
-}
+// }
 
-export default Login
+// export default Login
