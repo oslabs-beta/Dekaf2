@@ -4,6 +4,7 @@ import "./globals.css";
 import StoreProvider from "../store/StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
+//{inter.className}
 
 export const metadata: Metadata = {
   title: "Dekaf",
