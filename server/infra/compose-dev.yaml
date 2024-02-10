@@ -1,0 +1,16 @@
+version: ' 3'
+services:
+  app:
+    image: dekafoslabs/app-dev
+    container_name: dev-app-container-dekaf
+    restart: always
+    ports:
+      - 3000:3000
+      - 8080:8080
+    volumes:
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+      - .:/../../.env
+    command: npm run dev:services:up
+volumes:
+  node_modules:
