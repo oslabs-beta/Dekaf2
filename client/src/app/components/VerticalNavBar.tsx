@@ -31,4 +31,5 @@ const VerticalNavBar = () => {
   );
 };
 
-export default VerticalNavBar;
+export default VerticalNavBar
+
