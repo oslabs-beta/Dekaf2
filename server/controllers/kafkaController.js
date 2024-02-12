@@ -9,7 +9,6 @@ const kafkaController = {
   async getAllEnvironments(req, res, next) {
     try {
       const environments = await confluentAPI.listEnvironments();
-
       res.locals.payload = environments;
       next();
     } catch (e) {
@@ -35,12 +34,50 @@ const kafkaController = {
     } finally {
     }
   },
+  async getAllBrokers(req, res, next) {
+    try {
+      const { accountID, environmentID } = req.body;
+      const clusters = await confluentAPI.listBrokers(accountID, environmentID);
+      res.locals.payload = clusters;
+      next();
+    } catch (e) {
+      console.log(`Error on kafkaController.getAllBrokers: `, e);
+      next({});
+    } finally {
+    }
+  },
   async getAllTopics(req, res, next) {
-    //clusterID
     try {
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getAllTopics: `, e);
+      next({});
+    } finally {
+    }
+  },
+  async getTopics(req, res, next) {
+    const { topicNames } = req.query.topicNames;
+    try {
+      const topics = await confluentAPI.getTopics(topicNames, confluentEnv);
+      res.locals.payload = topics;
+      next();
+    } catch (e) {
+      console.log(`Error on kafkaController.getTopics: `, e);
+      next({});
+    } finally {
+    }
+  },
+  async getTopicsPartitions(req, res, next) {
+    const { topicNames } = req.query.topicNames;
+    try {
+      const topicsPartitions = await confluentAPI.getTopicsPartitions(
+        topicNames,
+        confluentEnv
+      );
+      res.locals.payload = topicsPartitions;
+      next();
+    } catch (e) {
+      console.log(`Error on kafkaController.getTopics: `, e);
       next({});
     } finally {
     }

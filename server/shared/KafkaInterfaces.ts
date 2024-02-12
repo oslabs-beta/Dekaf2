@@ -35,6 +35,24 @@ interface ICluster {
   };
 }
 
+interface IBroker {
+  kind: string;
+  metadata: {
+    self: string;
+    resource_name: string;
+  };
+  cluster_id: string;
+  broker_id: number;
+  host: string;
+  port: number;
+  configs: {
+    related: string;
+  };
+  partition_replicas: {
+    related: string;
+  };
+}
+
 interface IClusterDTO {}
 
 interface ITopics {
@@ -57,6 +75,25 @@ interface ITopics {
   partition_reassignments: {
     related: string;
   };
+}
+
+interface ITopicDetails {
+  name: string;
+  configs: {
+    "cleanup.policy": string;
+  };
+  partitions: Array<IPartition>;
+}
+
+interface IPartition {
+  partition: number;
+  leader: number;
+  replicas: Array<IPartitionReplicas>;
+}
+interface IPartitionReplicas {
+  broker: number;
+  leader: boolean;
+  in_sync: boolean;
 }
 
 interface ITopicsDTO {}
@@ -84,7 +121,13 @@ interface IPartition {
 interface IMessages {}
 interface IMessagesDTO {}
 
-export { ICluster, ITopics, IMessages, IEnvironments };
+module.exports = {
+  ICluster,
+  ITopics,
+  IMessages,
+  IEnvironments,
+  IBroker,
+};
 
 //Kafla API Responses
 //LIST CLUSTERS
