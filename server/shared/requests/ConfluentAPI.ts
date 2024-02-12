@@ -153,7 +153,6 @@ class ConfluentAPI implements IConfluentAPI {
     }
     return allTopicsPartitions;
   }
-
   listMessagesFromTopic(topicID: string): Promise<IMessages[]> {
     return;
   }
