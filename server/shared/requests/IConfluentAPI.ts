@@ -1,20 +1,20 @@
-import {
+const {
   ICluster,
   IMessages,
   ITopics,
   IEnvironments,
   IBroker,
   ITopicDetails,
-} from "../KafkaInterfaces";
+} = require("../KafkaInterfaces");
 
 interface IConfluentAPI {
   //   authToken: any;
-  listEnvironments(accountID): Promise<IEnvironments[]>;
-  listClusters(accountID, confluentEnv): Promise<ICluster[]>;
-  listBrokers(clusterID, confluentEnv): Promise<IBroker[]>;
-  getTopics(topicNames, confluentEnv): Promise<ITopicDetails[]>;
-  listTopicsFromCluster(confluentEnv): Promise<ITopics[]>;
-  // listMessagesFromTopic(topicID): Promise<IMessages[]>;
+  listEnvironments(accountID): Promise<(typeof IEnvironments)[]>;
+  listClusters(accountID, confluentEnv): Promise<(typeof ICluster)[]>;
+  listBrokers(clusterID, confluentEnv): Promise<(typeof IBroker)[]>;
+  getTopics(topicNames, confluentEnv): Promise<(typeof ITopicDetails)[]>;
+  listTopicsFromCluster(confluentEnv): Promise<(typeof ITopics)[]>;
+  listMessagesFromTopic(topicID): Promise<(typeof IMessages)[]>;
 }
 
 export default IConfluentAPI;
