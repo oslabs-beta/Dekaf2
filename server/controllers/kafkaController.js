@@ -59,6 +59,22 @@ const kafkaController = {
     const { topicNames } = req.query.topicNames;
     try {
       const topics = await confluentAPI.getTopics(topicNames, confluentEnv);
+      res.locals.payload = topics;
+      next();
+    } catch (e) {
+      console.log(`Error on kafkaController.getTopics: `, e);
+      next({});
+    } finally {
+    }
+  },
+  async getTopicsPartitions(req, res, next) {
+    const { topicNames } = req.query.topicNames;
+    try {
+      const topicsPartitions = await confluentAPI.getTopicsPartitions(
+        topicNames,
+        confluentEnv
+      );
+      res.locals.payload = topicsPartitions;
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getTopics: `, e);

@@ -127,6 +127,32 @@ class ConfluentAPI implements IConfluentAPI {
     }
     return allTopics;
   }
+  async getTopicsPartitions(
+    topicNames: string,
+    confluentEnv: string
+  ): Promise<ITopics[]> {
+    const allTopicsPartitions = [];
+    for (const topic of topicNames) {
+      try {
+        const res = await fetch(
+          `https://api.confluent.cloud/cmk/v2/topics/${topic}`,
+          {
+            headers: {
+              Authorization: `Basic ${this.authToken}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
+        let parsed = await res.json();
+        console.log(`topic`, parsed);
+        allTopicsPartitions.push(topic);
+      } catch (e) {
+        console.log(`error`, e);
+      }
+    }
+    return allTopicsPartitions;
+  }
 
   listMessagesFromTopic(topicID: string): Promise<IMessages[]> {
     return;
