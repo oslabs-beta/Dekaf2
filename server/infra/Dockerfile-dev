@@ -1,0 +1,5 @@
+FROM node:hydrogen-alpine3.19
+WORKDIR /app/project
+COPY package*.json /app/project
+RUN npm install
+EXPOSE 3000

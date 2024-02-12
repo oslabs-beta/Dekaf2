@@ -5,13 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev server/infra/server.ts",
-    "dev services:up": "docker compose -f server/infra/compose.yaml up",
-    "dev services:down": "docker compose -f server/infra/compose.yaml down",
+    "dev": "docker compose -f server/infra/compose.yaml up",
+    "dev:services:up": "ts-node-dev server/infra/server.ts & next dev",
+    "dev:services:down": "docker compose -f server/infra/compose.yaml down",
     "dev services:stop": "docker compose -f server/infra/compose.yaml stop",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "docker:build:dev": "docker build -t dekafoslabs/app-dev -f server/infra/Dockerfile-dev ."
   },
   "author": "",
+  "comment": {
+    "dev": "ts-node-dev server/infra/server.ts"
+  },
   "license": "ISC",
   "dependencies": {
     "avro-js": "^1.11.3",

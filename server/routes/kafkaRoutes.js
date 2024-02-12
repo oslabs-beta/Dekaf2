@@ -15,9 +15,29 @@ router.get("/clusters", kafkaController.getAllClusters, async (req, res) => {
   res.status(200).json(res.locals.payload);
 });
 
-router.get("/topics", async (req, res) => {
+router.get("/brokers", kafkaController.getAllBrokers, async (req, res) => {
   res.status(200).json(res.locals.payload);
 });
+
+router.get("/topics", kafkaController.getAllTopics, async (req, res) => {
+  res.status(200).json(res.locals.payload);
+});
+
+router.get(
+  "/topics/:topicNames",
+  kafkaController.getTopics,
+  async (req, res) => {
+    res.status(200).json(res.locals.payload);
+  }
+);
+
+router.get(
+  "/partitions",
+  kafkaController.getTopicsPartitions,
+  async (req, res) => {
+    res.status(200).json(res.locals.payload);
+  }
+);
 
 router.get("/messages", async (req, res) => {
   res.status(200).json(res.locals.payload);
