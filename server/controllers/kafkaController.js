@@ -47,11 +47,25 @@ const kafkaController = {
     }
   },
   async getAllTopics(req, res, next) {
-    //clusterID
+    //Check if request asks for data on specific topics
+    const { topicIDs } = req.params.topicIDs;
+
+    //else, get a list of topics
     try {
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getAllTopics: `, e);
+      next({});
+    } finally {
+    }
+  },
+  async getTopics(req, res, next) {
+    const { topicIDs } = req.query.topicIDs;
+    try {
+      const topics = await confluentAPI.getTopics(topicIDs, confluentEnv);
+      next();
+    } catch (e) {
+      console.log(`Error on kafkaController.getTopics: `, e);
       next({});
     } finally {
     }

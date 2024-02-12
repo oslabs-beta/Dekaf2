@@ -77,6 +77,25 @@ interface ITopics {
   };
 }
 
+interface ITopicDetails {
+  name: string;
+  configs: {
+    "cleanup.policy": string;
+  };
+  partitions: Array<IPartition>;
+}
+
+interface IPartition {
+  partition: number;
+  leader: number;
+  replicas: Array<IPartitionReplicas>;
+}
+interface IPartitionReplicas {
+  broker: number;
+  leader: boolean;
+  in_sync: boolean;
+}
+
 interface ITopicsDTO {}
 
 interface IPartition {
@@ -102,7 +121,13 @@ interface IPartition {
 interface IMessages {}
 interface IMessagesDTO {}
 
-export { ICluster, ITopics, IMessages, IEnvironments, IBroker };
+module.exports = {
+  ICluster,
+  ITopics,
+  IMessages,
+  IEnvironments,
+  IBroker,
+};
 
 //Kafla API Responses
 //LIST CLUSTERS

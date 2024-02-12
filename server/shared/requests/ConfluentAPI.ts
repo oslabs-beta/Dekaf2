@@ -21,6 +21,8 @@ class ConfluentAPI implements IConfluentAPI {
         {
           headers: {
             Authorization: `Basic ${this.authToken}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
           },
         }
       );
@@ -43,6 +45,8 @@ class ConfluentAPI implements IConfluentAPI {
         {
           headers: {
             Authorization: `Basic ${this.authToken}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
           },
         }
       );
@@ -65,6 +69,8 @@ class ConfluentAPI implements IConfluentAPI {
         {
           headers: {
             Authorization: `Basic ${this.authToken}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
           },
         }
       );
@@ -77,8 +83,39 @@ class ConfluentAPI implements IConfluentAPI {
       console.log(`and we're done`);
     }
   }
-  // listTopicsFromCluster(clusterID: any): Promise<ITopics[]> {}
-  // listMessagesFromTopic(topicID: any): Promise<IMessages[]> {}
+  async getTopics(
+    topicNames: string,
+    confluentEnv: string
+  ): Promise<ITopics[]> {
+    const allTopics = [];
+    for (const topic of topicNames) {
+      try {
+        const res = await fetch(
+          `https://api.confluent.cloud/cmk/v2/topics/${topic}`,
+          {
+            headers: {
+              Authorization: `Basic ${this.authToken}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
+        let parsed = await res.json();
+        console.log(`topic`, parsed);
+        allTopics.push(topic);
+        return await parsed.data;
+      } catch (e) {
+        console.log(`error`, e);
+      }
+    }
+    return allTopics;
+  }
+  listTopicsFromCluster(clusterID: string): Promise<ITopics[]> {
+    return;
+  }
+  listMessagesFromTopic(topicID: string): Promise<IMessages[]> {
+    return;
+  }
 }
 
 module.exports = ConfluentAPI;
