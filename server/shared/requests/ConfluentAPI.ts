@@ -83,6 +83,23 @@ class ConfluentAPI implements IConfluentAPI {
       console.log(`and we're done`);
     }
   }
+  async listTopicsFromCluster(confluentEnv: string): Promise<ITopics[]> {
+    //Might need to change the URl for the actual host (can pass using confluentEnv)
+    try {
+      const res = await fetch(`https://api.confluent.cloud/cmk/v2/topics`, {
+        headers: {
+          Authorization: `Basic ${this.authToken}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+      let topicNames = await res.json();
+      console.log(`topicNames`, topicNames);
+      return await topicNames;
+    } catch (e) {
+      console.log(`error`, e);
+    }
+  }
   async getTopics(
     topicNames: string,
     confluentEnv: string
@@ -110,9 +127,7 @@ class ConfluentAPI implements IConfluentAPI {
     }
     return allTopics;
   }
-  listTopicsFromCluster(clusterID: string): Promise<ITopics[]> {
-    return;
-  }
+
   listMessagesFromTopic(topicID: string): Promise<IMessages[]> {
     return;
   }

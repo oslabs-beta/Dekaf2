@@ -47,10 +47,6 @@ const kafkaController = {
     }
   },
   async getAllTopics(req, res, next) {
-    //Check if request asks for data on specific topics
-    const { topicIDs } = req.params.topicIDs;
-
-    //else, get a list of topics
     try {
       next();
     } catch (e) {
@@ -60,9 +56,9 @@ const kafkaController = {
     }
   },
   async getTopics(req, res, next) {
-    const { topicIDs } = req.query.topicIDs;
+    const { topicNames } = req.query.topicNames;
     try {
-      const topics = await confluentAPI.getTopics(topicIDs, confluentEnv);
+      const topics = await confluentAPI.getTopics(topicNames, confluentEnv);
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getTopics: `, e);
