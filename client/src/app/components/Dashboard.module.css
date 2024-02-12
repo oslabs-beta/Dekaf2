@@ -1,0 +1,43 @@
+
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    row-gap: 30px;
+
+}
+
+.header {
+    width: 1663px;
+    height: 276px;
+    border-radius: 0px 0px 16px 16px;
+    background: radial-gradient(36.28% 150.93% at 50% 50%, #3B8AFF 0%, #0048B2 100%);
+}
+
+.headerBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.headerBigText {
+    /* font-family: Inter; */
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    color: #FFFFFF;
+    padding: 10px;
+}
+
+.headerSmallText {
+    /* font-family: Inter; */
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+    color: #FFFFFF;
+    padding: 10px;
+}
