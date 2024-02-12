@@ -9,7 +9,6 @@ const kafkaController = {
   async getAllEnvironments(req, res, next) {
     try {
       const environments = await confluentAPI.listEnvironments();
-
       res.locals.payload = environments;
       next();
     } catch (e) {
@@ -31,6 +30,18 @@ const kafkaController = {
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getAllClusters: `, e);
+      next({});
+    } finally {
+    }
+  },
+  async getAllBrokers(req, res, next) {
+    try {
+      const { accountID, environmentID } = req.body;
+      const clusters = await confluentAPI.listBrokers(accountID, environmentID);
+      res.locals.payload = clusters;
+      next();
+    } catch (e) {
+      console.log(`Error on kafkaController.getAllBrokers: `, e);
       next({});
     } finally {
     }
