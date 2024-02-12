@@ -1,0 +1,56 @@
+
+
+.sidebar {
+    width: 257px;
+    height: 2016px;
+    flex-shrink: 0;
+    background: var(--FFFFFF-Bg-1, #FFF);
+    box-shadow: 0px 10px 30px 0px rgba(17, 38, 146, 0.05);
+}
+
+.navigationBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 233px;
+    padding: 8px 24px;
+
+}
+
+.link:hover {
+
+    box-shadow: 0px 2px 4px 0px rgba(138, 146, 166, 0.30);
+    background-color: #3A57E8;
+    color: white;
+
+}
+
+
+
+
+
+
+.linkText {
+
+    /* font-family: Inter; */
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 175%;
+    color: #8A9286;
+    
+}
+
+
+.link:hover .linkText {
+    color: white;
+}
