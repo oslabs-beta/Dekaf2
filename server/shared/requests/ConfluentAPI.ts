@@ -1,4 +1,5 @@
 import {
+  IBroker,
   ICluster,
   IEnvironments,
   IMessages,
@@ -20,6 +21,8 @@ class ConfluentAPI implements IConfluentAPI {
         {
           headers: {
             Authorization: `Basic ${this.authToken}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
           },
         }
       );
@@ -32,13 +35,18 @@ class ConfluentAPI implements IConfluentAPI {
       console.log(`and we're done`);
     }
   }
-  async listClusters(accountID: any, confluentEnv: any): Promise<ICluster[]> {
+  async listClusters(
+    accountID: string,
+    confluentEnv: string
+  ): Promise<ICluster[]> {
     try {
       const res = await fetch(
         `https://api.confluent.cloud/cmk/v2/clusters?environment=${confluentEnv}`,
         {
           headers: {
             Authorization: `Basic ${this.authToken}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
           },
         }
       );
@@ -51,8 +59,103 @@ class ConfluentAPI implements IConfluentAPI {
       console.log(`and we're done`);
     }
   }
-  // listTopicsFromCluster(clusterID: any): Promise<ITopics[]> {}
-  // listMessagesFromTopic(topicID: any): Promise<IMessages[]> {}
+  async listBrokers(
+    clusterID: string,
+    confluentEnv: string
+  ): Promise<IBroker[]> {
+    try {
+      const res = await fetch(
+        `https://api.confluent.cloud/cmk/v3/clusters/${clusterID}/brokers`,
+        {
+          headers: {
+            Authorization: `Basic ${this.authToken}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
+      let parsed = await res.json();
+      console.log(`clusters`, parsed);
+      return await parsed.data;
+    } catch (e) {
+      console.log(`error`, e);
+    } finally {
+      console.log(`and we're done`);
+    }
+  }
+  async listTopicsFromCluster(confluentEnv: string): Promise<ITopics[]> {
+    //Might need to change the URl for the actual host (can pass using confluentEnv)
+    try {
+      const res = await fetch(`https://api.confluent.cloud/cmk/v2/topics`, {
+        headers: {
+          Authorization: `Basic ${this.authToken}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+      let topicNames = await res.json();
+      console.log(`topicNames`, topicNames);
+      return await topicNames;
+    } catch (e) {
+      console.log(`error`, e);
+    }
+  }
+  async getTopics(
+    topicNames: string,
+    confluentEnv: string
+  ): Promise<ITopics[]> {
+    const allTopics = [];
+    for (const topic of topicNames) {
+      try {
+        const res = await fetch(
+          `https://api.confluent.cloud/cmk/v2/topics/${topic}`,
+          {
+            headers: {
+              Authorization: `Basic ${this.authToken}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
+        let parsed = await res.json();
+        console.log(`topic`, parsed);
+        allTopics.push(topic);
+        return await parsed.data;
+      } catch (e) {
+        console.log(`error`, e);
+      }
+    }
+    return allTopics;
+  }
+  async getTopicsPartitions(
+    topicNames: string,
+    confluentEnv: string
+  ): Promise<ITopics[]> {
+    const allTopicsPartitions = [];
+    for (const topic of topicNames) {
+      try {
+        const res = await fetch(
+          `https://api.confluent.cloud/cmk/v2/topics/${topic}`,
+          {
+            headers: {
+              Authorization: `Basic ${this.authToken}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
+        let parsed = await res.json();
+        console.log(`topic`, parsed);
+        allTopicsPartitions.push(topic);
+      } catch (e) {
+        console.log(`error`, e);
+      }
+    }
+    return allTopicsPartitions;
+  }
+  listMessagesFromTopic(topicID: string): Promise<IMessages[]> {
+    return;
+  }
 }
 
 module.exports = ConfluentAPI;
