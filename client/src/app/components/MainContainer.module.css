@@ -1,0 +1,11 @@
+
+
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    width: 1920px;
+    height: 1880px;
+    background-color: #E9ECEF;
+    
+    /* background: var(--e9ecef-Bg-2, #E9ECEF); */
+}

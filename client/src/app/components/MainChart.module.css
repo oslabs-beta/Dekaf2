@@ -1,0 +1,13 @@
+
+
+.mainChart {
+    display: flex;
+    flex-direction: column;
+    
+    width: 1064px;
+    padding: 24px;
+    gap: 24px;
+    background-color: white;
+    box-shadow: 0px 10px 13px 0px #E9ECEF;
+
+}
