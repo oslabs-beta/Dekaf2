@@ -15,6 +15,7 @@
 .header {
     width: 1663px;
     height: 276px;
+    padding-top: 7%;
     border-radius: 0px 0px 16px 16px;
     background: radial-gradient(36.28% 150.93% at 50% 50%, #3B8AFF 0%, #0048B2 100%);
 }
