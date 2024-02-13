@@ -8,9 +8,10 @@ const Sidebar = () => {
     return (
 
         <div className={styles.sidebar}> 
+        
             <div className={styles.navigationBox}>
 
-
+            <h2 className={styles.home}>Home</h2>
                 <div className={styles.link}>
                     <div className={styles.linkText}>
                         Dashboard
