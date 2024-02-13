@@ -3,11 +3,11 @@
 
 
 .summaryCards {
-    width: 100%;
+    width: 1111px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     /* justify-content: space-between; */
     padding-left: 50px;
     gap: 20px;
