@@ -3,9 +3,9 @@
 .mainContainer {
     display: flex;
     flex-direction: row;
-    width: 1920px;
+    width: 100%;
     height: 1880px;
+    overflow-x: hidden;
     background-color: #E9ECEF;
-    
     /* background: var(--e9ecef-Bg-2, #E9ECEF); */
 }

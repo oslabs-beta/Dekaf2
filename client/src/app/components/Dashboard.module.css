@@ -4,7 +4,11 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    /* align-items: center; */
     row-gap: 30px;
+    height: 450px;
+    min-width: 90%;
+    max-width: 100%;
 
 }
 
@@ -40,4 +44,11 @@
     line-height: 130%;
     color: #FFFFFF;
     padding: 10px;
+}
+
+.belowSummaryCards {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 50px;
 }

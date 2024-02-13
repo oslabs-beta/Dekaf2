@@ -2,6 +2,9 @@ import React from 'react';
 
 import SummaryCards from './SummaryCards';
 import MainChart from './MainChart';
+import SmallCharts from './SmallCharts';
+
+import ActivityOverviews from './ActivityOverviews';
 
 import styles from './Dashboard.module.css';
 
@@ -26,10 +29,22 @@ const Dashboard = () => {
             <div>
                 <SummaryCards />
             </div>
+                
+           
+            <div className={styles.belowSummaryCards}>
+                <div>
+                    <MainChart />
+                </div>
 
-            <div>
-                <MainChart />
+                <div>
+                    <SmallCharts />
+                </div>
+
+                <div>
+                    <ActivityOverviews />
+                </div>
             </div>
+
         </div>
        
     )
