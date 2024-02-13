@@ -31,8 +31,6 @@ class ConfluentAPI implements IConfluentAPI {
       return await parsed.data;
     } catch (e) {
       console.log(`error`, e);
-    } finally {
-      console.log(`and we're done`);
     }
   }
   async listClusters(
@@ -55,8 +53,6 @@ class ConfluentAPI implements IConfluentAPI {
       return await parsed.data;
     } catch (e) {
       console.log(`error`, e);
-    } finally {
-      console.log(`and we're done`);
     }
   }
   async listBrokers(
@@ -79,8 +75,6 @@ class ConfluentAPI implements IConfluentAPI {
       return await parsed.data;
     } catch (e) {
       console.log(`error`, e);
-    } finally {
-      console.log(`and we're done`);
     }
   }
   async listTopicsFromCluster(

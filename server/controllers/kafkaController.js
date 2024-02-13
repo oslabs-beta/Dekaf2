@@ -14,7 +14,6 @@ const kafkaController = {
     } catch (e) {
       console.log(`Error on kafkaController.getAllEnvironments: `, e);
       next({});
-    } finally {
     }
   },
   async getAllClusters(req, res, next) {
@@ -31,7 +30,6 @@ const kafkaController = {
     } catch (e) {
       console.log(`Error on kafkaController.getAllClusters: `, e);
       next({});
-    } finally {
     }
   },
   async getAllBrokers(req, res, next) {
@@ -43,7 +41,6 @@ const kafkaController = {
     } catch (e) {
       console.log(`Error on kafkaController.getAllBrokers: `, e);
       next({});
-    } finally {
     }
   },
   async getAllTopics(req, res, next) {
@@ -52,7 +49,6 @@ const kafkaController = {
     } catch (e) {
       console.log(`Error on kafkaController.getAllTopics: `, e);
       next({});
-    } finally {
     }
   },
   async getTopics(req, res, next) {
@@ -64,7 +60,6 @@ const kafkaController = {
     } catch (e) {
       console.log(`Error on kafkaController.getTopics: `, e);
       next({});
-    } finally {
     }
   },
   async getTopicsPartitions(req, res, next) {
@@ -79,7 +74,6 @@ const kafkaController = {
     } catch (e) {
       console.log(`Error on kafkaController.getTopics: `, e);
       next({});
-    } finally {
     }
   },
   async getAllMessages(req, res, next) {
@@ -89,7 +83,6 @@ const kafkaController = {
     } catch (e) {
       console.log(`Error on kafkaController.getAllMessages: `, e);
       next({});
-    } finally {
     }
   },
   async getMetric(req, res, next) {
@@ -100,7 +93,6 @@ const kafkaController = {
     } catch (e) {
       console.log(`Error on kafkaController.getMetric: `, e);
       next({});
-    } finally {
     }
   },
 };

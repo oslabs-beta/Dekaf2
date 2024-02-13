@@ -10,9 +10,12 @@ import {
   fetchEnvironments,
   selectAllEnvironments,
 } from "./slices/environmentsSlice";
+import { fetchClusters, selectAllClusters } from "./slices/clustersSlice";
 
 export default function Home() {
   const dispatch = useDispatch();
+
+  //Environments datafetching
   const environments = useSelector(selectAllEnvironments);
   useEffect(() => {
     if (environments.status === "idle") {
@@ -21,9 +24,19 @@ export default function Home() {
     if (environments.status === "succeeded") {
       console.log(`environments `, environments);
     }
-    // let envs = useSelector(selectAllEnvironments);
-    // console.lo
   }, [environments.status]);
+
+  //Clusters datafetching
+  const clusters = useSelector(selectAllClusters);
+  useEffect(() => {
+    if (clusters.status === "idle") {
+      dispatch(fetchClusters());
+    }
+    if (clusters.status === "succeeded") {
+      console.log(`clusters `, clusters);
+    }
+  }, [clusters.status]);
+
   return (
     <main>
       {/* <h1>Log In</h1> */}
