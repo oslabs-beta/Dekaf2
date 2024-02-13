@@ -1,10 +1,10 @@
-import {
+const {
   IBroker,
   ICluster,
   IEnvironments,
   IMessages,
   ITopics,
-} from "../KafkaInterfaces";
+} = require("../KafkaInterfaces");
 
 import IConfluentAPI from "./IConfluentAPI";
 
@@ -14,7 +14,7 @@ class ConfluentAPI implements IConfluentAPI {
     this.authToken = authToken;
   }
 
-  async listEnvironments(): Promise<IEnvironments[]> {
+  async listEnvironments(): Promise<(typeof IEnvironments)[]> {
     try {
       const res = await fetch(
         `https://api.confluent.cloud/org/v2/environments`,
@@ -38,7 +38,7 @@ class ConfluentAPI implements IConfluentAPI {
   async listClusters(
     accountID: string,
     confluentEnv: string
-  ): Promise<ICluster[]> {
+  ): Promise<(typeof ICluster)[]> {
     try {
       const res = await fetch(
         `https://api.confluent.cloud/cmk/v2/clusters?environment=${confluentEnv}`,
@@ -62,7 +62,7 @@ class ConfluentAPI implements IConfluentAPI {
   async listBrokers(
     clusterID: string,
     confluentEnv: string
-  ): Promise<IBroker[]> {
+  ): Promise<(typeof IBroker)[]> {
     try {
       const res = await fetch(
         `https://api.confluent.cloud/cmk/v3/clusters/${clusterID}/brokers`,
@@ -83,7 +83,9 @@ class ConfluentAPI implements IConfluentAPI {
       console.log(`and we're done`);
     }
   }
-  async listTopicsFromCluster(confluentEnv: string): Promise<ITopics[]> {
+  async listTopicsFromCluster(
+    confluentEnv: string
+  ): Promise<(typeof ITopics)[]> {
     //Might need to change the URl for the actual host (can pass using confluentEnv)
     try {
       const res = await fetch(`https://api.confluent.cloud/cmk/v2/topics`, {
@@ -103,7 +105,7 @@ class ConfluentAPI implements IConfluentAPI {
   async getTopics(
     topicNames: string,
     confluentEnv: string
-  ): Promise<ITopics[]> {
+  ): Promise<(typeof ITopics)[]> {
     const allTopics = [];
     for (const topic of topicNames) {
       try {
@@ -130,7 +132,7 @@ class ConfluentAPI implements IConfluentAPI {
   async getTopicsPartitions(
     topicNames: string,
     confluentEnv: string
-  ): Promise<ITopics[]> {
+  ): Promise<(typeof ITopics)[]> {
     const allTopicsPartitions = [];
     for (const topic of topicNames) {
       try {
@@ -153,7 +155,7 @@ class ConfluentAPI implements IConfluentAPI {
     }
     return allTopicsPartitions;
   }
-  listMessagesFromTopic(topicID: string): Promise<IMessages[]> {
+  listMessagesFromTopic(topicID: string): Promise<(typeof IMessages)[]> {
     return;
   }
 }

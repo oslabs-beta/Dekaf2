@@ -56,8 +56,8 @@ const kafkaController = {
     }
   },
   async getTopics(req, res, next) {
-    const { topicNames } = req.query.topicNames;
     try {
+      const { topicNames } = req.query.topicNames;
       const topics = await confluentAPI.getTopics(topicNames, confluentEnv);
       res.locals.payload = topics;
       next();
@@ -68,8 +68,8 @@ const kafkaController = {
     }
   },
   async getTopicsPartitions(req, res, next) {
-    const { topicNames } = req.query.topicNames;
     try {
+      const { topicNames } = req.query.topicNames;
       const topicsPartitions = await confluentAPI.getTopicsPartitions(
         topicNames,
         confluentEnv
@@ -83,8 +83,8 @@ const kafkaController = {
     }
   },
   async getAllMessages(req, res, next) {
-    //topicID
     try {
+      //topicID
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getAllMessages: `, e);
@@ -93,9 +93,9 @@ const kafkaController = {
     }
   },
   async getMetric(req, res, next) {
-    //metricID
-    const { metricID } = req.params.metricID;
     try {
+      //metricID
+      const { metricID } = req.params.metricID;
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getMetric: `, e);

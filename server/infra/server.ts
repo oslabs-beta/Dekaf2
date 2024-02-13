@@ -1,11 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
+// const ensureAuthenticated = require("");
 const statusRouter = require("../routes/statusRoutes");
 const kafkaRouter = require("../routes/kafkaRoutes");
 const app = express();
 
 //GLOBAL MIDDLEWARES
 app.use(express.json());
+app.use(cors());
 
 // Logs incoming requests for testing purposes
 app.all("*", (req, res, next) => {
@@ -19,6 +22,8 @@ app.all("*", (req, res, next) => {
   `);
   next();
 });
+
+// app.use("*", ensureAuthenticated, (req, res, next) => {});
 
 //Hello world - first route to test application
 app.get("/", (req, res) => {
