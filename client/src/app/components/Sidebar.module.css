@@ -1,8 +1,9 @@
 
 
 .sidebar {
-    width: 15%;
-    min-width: 200px;
+    position: fixed;
+    width: 250px;
+    /* min-width: 200px; */
     height: 100%;
     flex-shrink: 0;
     background: var(--FFFFFF-Bg-1, #FFF);

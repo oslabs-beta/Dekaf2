@@ -1,6 +1,7 @@
 
 
 .dashboard {
+    margin-left: 250px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

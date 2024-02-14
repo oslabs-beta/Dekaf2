@@ -32,17 +32,17 @@ const Dashboard = () => {
                 
            
             <div className={styles.belowSummaryCards}>
-                <div>
+                
                     <MainChart />
-                </div>
+                
 
-                <div>
+               
                     <SmallCharts />
-                </div>
+                
 
-                <div>
+                
                     <ActivityOverviews />
-                </div>
+                
             </div>
 
         </div>
