@@ -22,16 +22,24 @@ export interface ICluster {
     updated_at: string;
   };
   spec: {
-    created_at: string;
-    resource_name: string;
-    self: string;
-    updated_at: string;
+    api_endpoint: string;
+    availability: string;
+    cloud: string;
+    config: {
+      kind: string;
+    };
+    display_name: string;
+    environment: {
+      id: string;
+      related: string;
+      resource_name: string;
+    };
+    http_endpoint: string;
+    kafka_bootstrap_endpoint: string;
+    region: string;
   };
   status: {
-    created_at: string;
-    resource_name: string;
-    self: string;
-    updated_at: string;
+    phase: string;
   };
 }
 
@@ -122,6 +130,7 @@ export interface IPartition2 {
 export interface IMessages {}
 export interface IMessagesDTO {}
 
+export interface IError {}
 // module.exports = {
 //   ICluster,
 //   ITopics: ITopics,

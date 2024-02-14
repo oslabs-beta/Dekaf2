@@ -1,3 +1,5 @@
+import { ICluster } from "../KafkaInterfaces";
+
 const {
   ICluster,
   IMessages,
@@ -13,7 +15,7 @@ interface IConfluentAPI {
   listClusters(accountID, confluentEnv): Promise<(typeof ICluster)[]>;
   listBrokers(clusterID, confluentEnv): Promise<(typeof IBroker)[]>;
   getTopics(topicNames, confluentEnv): Promise<(typeof ITopicDetails)[]>;
-  listTopicsFromCluster(confluentEnv): Promise<(typeof ITopics)[]>;
+  listTopicsFromClusters(clusters: ICluster[]): Promise<(typeof ITopics)[]>;
   listMessagesFromTopic(topicID): Promise<(typeof IMessages)[]>;
 }
 

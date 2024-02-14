@@ -1,37 +1,44 @@
 import IConfluentAPI from "../shared/requests/IConfluentAPI";
 
 const ConfluentAPI = require("../shared/requests/ConfluentAPI");
+// const token =
+//   "U1dDU1RPWUhCVU1TWlFIVjpPb2l6bWFYQWU0dC9HOTNQaDBVUDJjeDY0em05VmRDUjVBclJSV1M1MFZVejFOYkk4UFZFSVUwbnBoUnZEQTFx";
+//Cloud APi
+// const token =
+//   "WlFaRDNBQVJOQ0ozT1dSQjpWRDl0bWl3Y3htdytJZWY0ZXlmZHQxWEYxSHFBZWlNb25NTktYS20yWi81TlFIdTRRQ3VzWDlNcUNFZVBqbzNN";
+
+// Cloud API Key
+//key: VCA4H44DQR4LNZ2H
+//secret: 4kuWGOWcRmIFn9eO4sHVA0GDxPgNYDoLHKkqCmUCiCjY/SdXATUs5evXH492Y2cC
+// Base64 Encoded: VkNBNEg0NERRUjRMTloySDo0a3VXR09XY1JtSUZuOWVPNHNIVkEwR0R4UGdOWURvTEhLa3FDbVVDaUNqWS9TZFhBVFVzNWV2WEg0OTJZMmND
 const token =
-  "U1dDU1RPWUhCVU1TWlFIVjpPb2l6bWFYQWU0dC9HOTNQaDBVUDJjeDY0em05VmRDUjVBclJSV1M1MFZVejFOYkk4UFZFSVUwbnBoUnZEQTFx";
+  "VkNBNEg0NERRUjRMTloySDo0a3VXR09XY1JtSUZuOWVPNHNIVkEwR0R4UGdOWURvTEhLa3FDbVVDaUNqWS9TZFhBVFVzNWV2WEg0OTJZMmND";
+
 const confluentAPI = new ConfluentAPI(token);
 
 const kafkaController = {
   async getAllEnvironments(req, res, next) {
     try {
       const environments = await confluentAPI.listEnvironments();
-      res.locals.payload = environments;
+      res.locals.payload = await environments;
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getAllEnvironments: `, e);
       next({});
-    } finally {
     }
   },
   async getAllClusters(req, res, next) {
     try {
       const { accountID, environmentID } = req.body;
-
       const clusters = await confluentAPI.listClusters(
         accountID,
         environmentID
       );
-
-      res.locals.payload = clusters;
+      res.locals.payload = await clusters;
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getAllClusters: `, e);
       next({});
-    } finally {
     }
   },
   async getAllBrokers(req, res, next) {
@@ -43,28 +50,31 @@ const kafkaController = {
     } catch (e) {
       console.log(`Error on kafkaController.getAllBrokers: `, e);
       next({});
-    } finally {
     }
   },
   async getAllTopics(req, res, next) {
     try {
+      const { clusters } = req.body;
+      // We need the restEndpoint and clusterID to get all topics
+      const topics = await confluentAPI.listTopicsFromClusters(clusters);
+      console.log(`topics: `, await topics);
+      res.locals.payload = await topics;
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getAllTopics: `, e);
       next({});
-    } finally {
     }
   },
   async getTopics(req, res, next) {
     try {
       const { topicNames } = req.query.topicNames;
       const topics = await confluentAPI.getTopics(topicNames, confluentEnv);
-      res.locals.payload = topics;
+
+      res.locals.payload = await topics;
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getTopics: `, e);
       next({});
-    } finally {
     }
   },
   async getTopicsPartitions(req, res, next) {
@@ -79,7 +89,6 @@ const kafkaController = {
     } catch (e) {
       console.log(`Error on kafkaController.getTopics: `, e);
       next({});
-    } finally {
     }
   },
   async getAllMessages(req, res, next) {
@@ -89,7 +98,6 @@ const kafkaController = {
     } catch (e) {
       console.log(`Error on kafkaController.getAllMessages: `, e);
       next({});
-    } finally {
     }
   },
   async getMetric(req, res, next) {
@@ -100,7 +108,6 @@ const kafkaController = {
     } catch (e) {
       console.log(`Error on kafkaController.getMetric: `, e);
       next({});
-    } finally {
     }
   },
 };
