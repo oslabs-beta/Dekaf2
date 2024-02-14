@@ -1,4 +1,4 @@
-interface IEnvironments {
+export interface IEnvironments {
   api_version: string;
   display_name: string;
   id: string;
@@ -11,7 +11,7 @@ interface IEnvironments {
   };
 }
 
-interface ICluster {
+export interface ICluster {
   api_version: string;
   id: string;
   kind: string;
@@ -35,7 +35,7 @@ interface ICluster {
   };
 }
 
-interface IBroker {
+export interface IBroker {
   kind: string;
   metadata: {
     self: string;
@@ -53,9 +53,9 @@ interface IBroker {
   };
 }
 
-interface IClusterDTO {}
+export interface IClusterDTO {}
 
-interface ITopics {
+export interface ITopics {
   kind: string;
   metadata: {
     self: string;
@@ -77,7 +77,7 @@ interface ITopics {
   };
 }
 
-interface ITopicDetails {
+export interface ITopicDetails {
   name: string;
   configs: {
     "cleanup.policy": string;
@@ -85,20 +85,21 @@ interface ITopicDetails {
   partitions: Array<IPartition>;
 }
 
-interface IPartition {
+export interface IPartition {
   partition: number;
   leader: number;
   replicas: Array<IPartitionReplicas>;
 }
-interface IPartitionReplicas {
+
+export interface IPartitionReplicas {
   broker: number;
   leader: boolean;
   in_sync: boolean;
 }
 
-interface ITopicsDTO {}
+export interface ITopicsDTO {}
 
-interface IPartition {
+export interface IPartition2 {
   kind: string;
   metadata: {
     self: string;
@@ -118,16 +119,16 @@ interface IPartition {
   };
 }
 
-interface IMessages {}
-interface IMessagesDTO {}
+export interface IMessages {}
+export interface IMessagesDTO {}
 
-module.exports = {
-  ICluster,
-  ITopics,
-  IMessages,
-  IEnvironments,
-  IBroker,
-};
+// module.exports = {
+//   ICluster,
+//   ITopics: ITopics,
+//   IMessages: IMessages,
+//   IEnvironments: IEnvironments,
+//   IBroker: IBroker,
+// };
 
 //Kafla API Responses
 //LIST CLUSTERS

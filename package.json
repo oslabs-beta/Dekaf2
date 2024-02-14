@@ -4,6 +4,7 @@
   "description": "Apache Kafka Custom Error Handling Tool",
   "main": "index.js",
   "scripts": {
+    "dev1": "ts-node-dev server/infra/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "docker compose -f server/infra/compose.yaml up",
     "dev:services:up": "ts-node-dev server/infra/server.ts & next dev",
@@ -20,6 +21,7 @@
   "dependencies": {
     "avro-js": "^1.11.3",
     "chart.js": "^4.4.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.0",
     "express": "^4.18.2",
     "kafkajs": "^2.2.4",
@@ -27,6 +29,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "tsc": "^2.0.4"
   },
   "devDependencies": {
