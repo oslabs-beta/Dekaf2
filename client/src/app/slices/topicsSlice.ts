@@ -36,23 +36,23 @@ export const topicsSlice = createSlice({
     //Used for reducers that were not defined and auto-assigned action creators inside our slice - particular use cases
     builder
       .addCase(fetchTopics.pending, (state, action) => {
+        state.status = "loading";
         console.log(`####### fetchTopics.pending! `, {
           state_data: state?.data,
           status: state?.status,
           action_type: action.type,
           payload: action.payload,
         });
-        state.status = "loading";
       })
       .addCase(fetchTopics.fulfilled, (state, action) => {
+        state.data = action.payload; //Rewrites whole state with data from fetch
+        state.status = "succeeded";
         console.log(`####### fetchTopics.fulfilled! `, {
           state_data: state?.data,
           status: state?.status,
           action_type: action.type,
           payload: action.payload,
         });
-        state.data = action.payload; //Rewrites whole state with data from fetch
-        state.status = "succeeded";
       })
       .addCase(fetchTopics.rejected, (state, action) => {
         console.log("(`####### state.data ", state?.data);
@@ -92,11 +92,12 @@ export const fetchTopics = createAsyncThunk("topics/fetchTopics", async () => {
       const response = await fetch(
         `http://localhost:3000/api/v1/kafka/topics`,
         {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "http://localhost:3000",
           },
-          body: JSON.stringify(clusters),
+          body: JSON.stringify({ clusters: clusters }),
         }
       );
       // console.log(`BASE URL: ${process.env.API_BASE_URL}`);

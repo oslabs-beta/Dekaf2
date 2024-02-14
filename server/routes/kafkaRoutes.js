@@ -21,7 +21,7 @@ router.get("/brokers", kafkaController.getAllBrokers, async (req, res) => {
   res.status(200).json(res.locals.payload);
 });
 
-router.get("/topics", kafkaController.getAllTopics, async (req, res) => {
+router.post("/topics", kafkaController.getAllTopics, async (req, res) => {
   console.log(`API Topics `, res.locals.payload);
   res.status(200).json(res.locals.payload);
 });
