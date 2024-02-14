@@ -130,6 +130,7 @@ export interface IPartition2 {
 export interface IMessages {}
 export interface IMessagesDTO {}
 
+export interface IError {}
 // module.exports = {
 //   ICluster,
 //   ITopics: ITopics,
