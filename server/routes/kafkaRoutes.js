@@ -13,7 +13,6 @@ router.get(
 );
 
 router.get("/clusters", kafkaController.getAllClusters, async (req, res) => {
-  console.log(`response/clusters `, res.locals.payload);
   res.status(200).json(res.locals.payload);
 });
 

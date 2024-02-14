@@ -1,8 +1,11 @@
 import IConfluentAPI from "../shared/requests/IConfluentAPI";
 
 const ConfluentAPI = require("../shared/requests/ConfluentAPI");
+// const token =
+//   "U1dDU1RPWUhCVU1TWlFIVjpPb2l6bWFYQWU0dC9HOTNQaDBVUDJjeDY0em05VmRDUjVBclJSV1M1MFZVejFOYkk4UFZFSVUwbnBoUnZEQTFx";
+//Cloud APi
 const token =
-  "U1dDU1RPWUhCVU1TWlFIVjpPb2l6bWFYQWU0dC9HOTNQaDBVUDJjeDY0em05VmRDUjVBclJSV1M1MFZVejFOYkk4UFZFSVUwbnBoUnZEQTFx";
+  "WlFaRDNBQVJOQ0ozT1dSQjpWRDl0bWl3Y3htdytJZWY0ZXlmZHQxWEYxSHFBZWlNb25NTktYS20yWi81TlFIdTRRQ3VzWDlNcUNFZVBqbzNN";
 const confluentAPI = new ConfluentAPI(token);
 
 const kafkaController = {
@@ -19,12 +22,10 @@ const kafkaController = {
   async getAllClusters(req, res, next) {
     try {
       const { accountID, environmentID } = req.body;
-
       const clusters = await confluentAPI.listClusters(
         accountID,
         environmentID
       );
-      console.log(`Found this clusters `, await clusters);
       res.locals.payload = await clusters;
       next();
     } catch (e) {
@@ -45,6 +46,11 @@ const kafkaController = {
   },
   async getAllTopics(req, res, next) {
     try {
+      const { clusters } = req.body;
+      // We need the restEndpoint and clusterID to get all topics
+      const topics = await confluentAPI.listTopicsFromClusters(clusters);
+      // console.log(`topics: `, await topics);
+      res.locals.payload = await topics;
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getAllTopics: `, e);

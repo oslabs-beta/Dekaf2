@@ -6,6 +6,7 @@ const {
   ITopics,
 } = require("../KafkaInterfaces");
 
+import { ICluster } from "../KafkaInterfaces";
 import IConfluentAPI from "./IConfluentAPI";
 
 class ConfluentAPI implements IConfluentAPI {
@@ -27,7 +28,6 @@ class ConfluentAPI implements IConfluentAPI {
         }
       );
       let parsed = await res.json();
-
       return await parsed.data;
     } catch (e) {
       console.log(`error`, e);
@@ -86,23 +86,39 @@ class ConfluentAPI implements IConfluentAPI {
       console.log(`error`, e);
     }
   }
-  async listTopicsFromCluster(
-    confluentEnv: string
+  async listTopicsFromClusters(
+    clusters: ICluster[]
   ): Promise<(typeof ITopics)[]> {
-    //Might need to change the URl for the actual host (can pass using confluentEnv)
     try {
-      const res = await fetch(`https://api.confluent.cloud/cmk/v2/topics`, {
-        headers: {
-          Authorization: `Basic ${this.authToken}`,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-      let topicNames = await res.json();
-      console.log(`topicNames`, topicNames);
-      return await topicNames;
+      const topics = [];
+
+      //Retrieve topics from each environment
+      for (let i = 0; i < clusters.length; i++) {
+        const clusterRestEndpoint = clusters[i].spec.http_endpoint;
+        const clusterID = clusters[i].id;
+
+        const res = await fetch(
+          `${clusterRestEndpoint}/kafka/v3/clusters/${clusterID}/topics`,
+          {
+            headers: {
+              Authorization: `Basic ${this.authToken}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
+
+        let parsed = await res.json();
+
+        if (await parsed.data) {
+          await parsed.data.forEach((topic) => {
+            topics.push(topic);
+          });
+        }
+      }
+      return await topics;
     } catch (e) {
-      console.log(`error`, e);
+      console.log(`Error on ConfluentAPI.listTopicsFromClusters: `, e);
     }
   }
   async getTopics(
@@ -123,7 +139,7 @@ class ConfluentAPI implements IConfluentAPI {
           }
         );
         let parsed = await res.json();
-        console.log(`topic`, parsed);
+
         allTopics.push(topic);
         return await parsed.data;
       } catch (e) {
@@ -150,7 +166,7 @@ class ConfluentAPI implements IConfluentAPI {
           }
         );
         let parsed = await res.json();
-        console.log(`topic`, parsed);
+
         allTopicsPartitions.push(topic);
       } catch (e) {
         console.log(`error`, e);

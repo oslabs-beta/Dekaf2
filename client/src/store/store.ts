@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import environmentsReducer from "../app/slices/environmentsSlice";
 import clustersReducer from "../app/slices/clustersSlice";
+import topicsReducer from "../app/slices/topicsSlice";
 import counterReducer from "../app/slices/counterSlice";
 
 //Importing method
@@ -9,6 +10,7 @@ export const store = configureStore({
   reducer: {
     environments: environmentsReducer,
     clusters: clustersReducer,
+    topics: topicsReducer,
     counter: counterReducer,
   },
 });
