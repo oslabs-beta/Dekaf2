@@ -12,14 +12,15 @@ import {
 } from "./slices/environmentsSlice";
 import { fetchClusters, selectAllClusters } from "./slices/clustersSlice";
 import { fetchTopics, selectAllTopics } from "./slices/topicsSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 export default function Home() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   //Environments datafetching
-  const environments = useSelector(selectAllEnvironments);
-  const clusters = useSelector(selectAllClusters);
-  const topics = useSelector(selectAllTopics);
+  const environments = useAppSelector(selectAllEnvironments);
+  const clusters = useAppSelector(selectAllClusters);
+  const topics = useAppSelector(selectAllTopics);
 
   useEffect(() => {
     if (environments.status === "idle") {
