@@ -24,8 +24,8 @@ const kafkaController = {
         accountID,
         environmentID
       );
-
-      res.locals.payload = clusters;
+      console.log(`Found this clusters `, await clusters);
+      res.locals.payload = await clusters;
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getAllClusters: `, e);

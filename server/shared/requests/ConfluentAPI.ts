@@ -27,32 +27,41 @@ class ConfluentAPI implements IConfluentAPI {
         }
       );
       let parsed = await res.json();
-      console.log(`listEnvironments`, parsed);
+
       return await parsed.data;
     } catch (e) {
       console.log(`error`, e);
     }
   }
-  async listClusters(
-    accountID: string,
-    confluentEnv: string
-  ): Promise<(typeof ICluster)[]> {
+  async listClusters(accountID: string, confluentEnv: string) {
     try {
-      const res = await fetch(
-        `https://api.confluent.cloud/cmk/v2/clusters?environment=${confluentEnv}`,
-        {
-          headers: {
-            Authorization: `Basic ${this.authToken}`,
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
+      //Retrieve all environmentIDs
+      let environments = await this.listEnvironments();
+      const environmentIDs = await environments.map((env) => env["id"]);
+      const clusters = [];
+
+      //Retrieve clusters from each environment
+      for (let i = 0; i < environmentIDs.length - 1; i++) {
+        const res = await fetch(
+          `https://api.confluent.cloud/cmk/v2/clusters?environment=${environmentIDs[i]}`,
+          {
+            headers: {
+              Authorization: `Basic ${this.authToken}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
+        let parsed = await res.json();
+        if (await parsed.data) {
+          await parsed.data.forEach((cluster) => {
+            clusters.push(cluster);
+          });
         }
-      );
-      let parsed = await res.json();
-      console.log(`clusters`, parsed);
-      return await parsed.data;
+      }
+      return await clusters;
     } catch (e) {
-      console.log(`error`, e);
+      console.log(`Error on ConfluentAPI.listClusters: `, e);
     }
   }
   async listBrokers(
