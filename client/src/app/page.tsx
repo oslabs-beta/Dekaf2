@@ -13,6 +13,7 @@ import {
 import { fetchClusters, selectAllClusters } from "./slices/clustersSlice";
 import { fetchTopics, selectAllTopics } from "./slices/topicsSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { fetchMessages } from "./slices/messagesSlice";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -39,6 +40,14 @@ export default function Home() {
       dispatch(fetchTopics());
     }
   }, [clusters.status]);
+
+  useEffect(() => {
+    if (clusters.status === "succeeded") {
+      dispatch(fetchMessages());
+    }
+  }, []);
+
+
 
   // //Clusters & topics datafetching
   // const clusters = useSelector(selectAllClusters);

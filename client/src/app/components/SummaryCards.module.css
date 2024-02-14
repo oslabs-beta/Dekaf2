@@ -13,9 +13,17 @@
     gap: 20px;
 }
 
-.card {
+
+.insideCard {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-around;
     height: 117px;
