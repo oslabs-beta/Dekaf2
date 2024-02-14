@@ -53,6 +53,7 @@ export const environmentsSlice = createSlice({
         });
         state.data = action.payload; //Rewrites whole state with data from fetch
         state.status = "succeeded";
+        console.log(`### UPDATING STATE | ENVIRONMENT: `, action.payload);
       })
       .addCase(fetchEnvironments.rejected, (state, action) => {
         console.log("(`####### state.data ", state?.data);
@@ -101,7 +102,7 @@ export const fetchEnvironments = createAsyncThunk(
       console.log("#### fetchEnvironments ", data);
       return data;
     } catch (e) {
-      console.log(e);
+      console.log("Error in asyncThunk - fetchEnvironments", e);
     }
   }
 );

@@ -30,7 +30,7 @@ class ConfluentAPI implements IConfluentAPI {
       let parsed = await res.json();
       return await parsed.data;
     } catch (e) {
-      console.log(`error`, e);
+      console.log(`Error in ConfluentAPI | listEnvironments:`, e);
     }
   }
   async listClusters(accountID: string, confluentEnv: string) {
@@ -61,7 +61,7 @@ class ConfluentAPI implements IConfluentAPI {
       }
       return await clusters;
     } catch (e) {
-      console.log(`Error on ConfluentAPI.listClusters: `, e);
+      console.log(`Error in ConfluentAPI | listClusters: `, e);
     }
   }
   async listBrokers(
@@ -83,12 +83,13 @@ class ConfluentAPI implements IConfluentAPI {
       console.log(`clusters`, parsed);
       return await parsed.data;
     } catch (e) {
-      console.log(`error`, e);
+      console.log(`Error in ConfluentAPI | listBrokers: `, e);
     }
   }
   async listTopicsFromClusters(
     clusters: ICluster[]
   ): Promise<(typeof ITopics)[]> {
+    console.log(`listTopicsFromClusters`);
     try {
       const topics = [];
 
@@ -96,7 +97,7 @@ class ConfluentAPI implements IConfluentAPI {
       for (let i = 0; i < clusters.length; i++) {
         const clusterRestEndpoint = clusters[i].spec.http_endpoint;
         const clusterID = clusters[i].id;
-
+        console.log(`clusterRestEndpoint `, clusterRestEndpoint);
         const res = await fetch(
           `${clusterRestEndpoint}/kafka/v3/clusters/${clusterID}/topics`,
           {
@@ -109,7 +110,7 @@ class ConfluentAPI implements IConfluentAPI {
         );
 
         let parsed = await res.json();
-
+        console.log(`parsed `, await parsed);
         if (await parsed.data) {
           await parsed.data.forEach((topic) => {
             topics.push(topic);
@@ -118,7 +119,7 @@ class ConfluentAPI implements IConfluentAPI {
       }
       return await topics;
     } catch (e) {
-      console.log(`Error on ConfluentAPI.listTopicsFromClusters: `, e);
+      console.log(`Error in ConfluentAPI | listTopicsFromClusters: `, e);
     }
   }
   async getTopics(
@@ -143,7 +144,7 @@ class ConfluentAPI implements IConfluentAPI {
         allTopics.push(topic);
         return await parsed.data;
       } catch (e) {
-        console.log(`error`, e);
+        console.log(`Error in ConfluentAPI | getTopics: `, e);
       }
     }
     return allTopics;
@@ -169,7 +170,7 @@ class ConfluentAPI implements IConfluentAPI {
 
         allTopicsPartitions.push(topic);
       } catch (e) {
-        console.log(`error`, e);
+        console.log(`Error in ConfluentAPI | getTopicsPartitions: `, e);
       }
     }
     return allTopicsPartitions;

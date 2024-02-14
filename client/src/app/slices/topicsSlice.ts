@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import type { RootState } from "../../store/store";
+import { store, type RootState } from "../../store/store";
 import { ITopics } from "../../../../server/shared/KafkaInterfaces";
 require("dotenv").config();
 
@@ -83,18 +83,54 @@ export const selectAllTopics = (state: RootState) => state.topics;
 //-------------------/     have methods to fetch data and update the state*/
 
 export const fetchTopics = createAsyncThunk("topics/fetchTopics", async () => {
-  // const response = await fetch(`${process.env.API_BASE_URL}/topics`);
   try {
-    const response = await fetch(`http://localhost:3000/api/v1/kafka/topics`, {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3000",
-      },
-    });
-    // console.log(`BASE URL: ${process.env.API_BASE_URL}`);
-    const data = await response.json();
-    console.log("#### fetchTopics ", data);
-    return data;
+    const clusterState = store.getState().clusters;
+    if (clusterState.status === "succeeded") {
+      const clusters = clusterState.data;
+      console.log(`#### clusters State `, clusterState);
+      console.log(`#### clusters `, clusters);
+      const response = await fetch(
+        `http://localhost:3000/api/v1/kafka/topics`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "http://localhost:3000",
+          },
+          body: JSON.stringify(clusters),
+        }
+      );
+      // console.log(`BASE URL: ${process.env.API_BASE_URL}`);
+      const data = await response.json();
+      console.log("#### fetchTopics ", data);
+      return data;
+    }
+
+    // // const response = await fetch(`${process.env.API_BASE_URL}/topics`);
+    // async function getTopics() {
+    //   const response = await fetch(`http://localhost:3000/api/v1/kafka/topics`, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "Access-Control-Allow-Origin": "http://localhost:3000",
+    //     },
+    //     body: JSON.stringify(clusters),
+    //   });
+    //   // console.log(`BASE URL: ${process.env.API_BASE_URL}`);
+    //   const data = await response.json();
+    //   console.log("#### fetchTopics ", data);
+    //   return data;
+    // }
+    // const clusters = useSelector(selectAllClusters);
+    // try {
+    //   if (clusters.status === "succeeded") {
+    //     return await getTopics();
+    //   } else {
+    //     dispatch(fetchClusters).then(async () => {
+    //       if (clusters.status === "succeeded") await getTopics();
+    //       setTimeout(async () => {
+    //         if (clusters.status === "succeeded") await getTopics();
+    //       }, 2000);
+    //     }); // Needs improvemente, but checks if clusters were successuflly retrieved before getting topics
+    //   }
   } catch (e) {
     console.log(e);
   }

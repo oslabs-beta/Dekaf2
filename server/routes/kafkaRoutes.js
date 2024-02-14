@@ -7,12 +7,13 @@ router.get(
   "/environments",
   kafkaController.getAllEnvironments,
   async (req, res) => {
-    // console.log(`response `, res.locals.payload);
+    console.log(`API Environments `, res.locals.payload);
     res.status(200).json(res.locals.payload);
   }
 );
 
 router.get("/clusters", kafkaController.getAllClusters, async (req, res) => {
+  console.log(`API Clusters `, res.locals.payload);
   res.status(200).json(res.locals.payload);
 });
 
@@ -21,6 +22,7 @@ router.get("/brokers", kafkaController.getAllBrokers, async (req, res) => {
 });
 
 router.get("/topics", kafkaController.getAllTopics, async (req, res) => {
+  console.log(`API Topics `, res.locals.payload);
   res.status(200).json(res.locals.payload);
 });
 

@@ -11,31 +11,44 @@ import {
   selectAllEnvironments,
 } from "./slices/environmentsSlice";
 import { fetchClusters, selectAllClusters } from "./slices/clustersSlice";
+import { fetchTopics, selectAllTopics } from "./slices/topicsSlice";
 
 export default function Home() {
   const dispatch = useDispatch();
 
   //Environments datafetching
   const environments = useSelector(selectAllEnvironments);
+  const clusters = useSelector(selectAllClusters);
+  const topics = useSelector(selectAllTopics);
+
   useEffect(() => {
     if (environments.status === "idle") {
       dispatch(fetchEnvironments());
     }
+  }, []);
+  useEffect(() => {
     if (environments.status === "succeeded") {
       console.log(`environments `, environments);
+      dispatch(fetchClusters());
     }
   }, [environments.status]);
 
-  //Clusters datafetching
-  const clusters = useSelector(selectAllClusters);
   useEffect(() => {
-    if (clusters.status === "idle") {
-      dispatch(fetchClusters());
-    }
     if (clusters.status === "succeeded") {
-      console.log(`clusters `, clusters);
+      dispatch(fetchTopics());
     }
   }, [clusters.status]);
+
+  // //Clusters & topics datafetching
+  // const clusters = useSelector(selectAllClusters);
+  // useEffect(() => {
+  //   if (clusters.status === "idle") {
+  //     dispatch(fetchClusters());
+  //   }
+  //   if (clusters.status === "succeeded") {
+  //     console.log(`clusters `, clusters);
+  //   }
+  // }, [clusters.status]);
 
   return (
     <main>
