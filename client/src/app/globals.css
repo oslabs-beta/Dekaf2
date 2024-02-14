@@ -10,13 +10,30 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    height: 100%;
+    margin: 0;
+  padding: 0;
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
 }
 
+main {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   color: rgb(var(--foreground-rgb));
 
 
