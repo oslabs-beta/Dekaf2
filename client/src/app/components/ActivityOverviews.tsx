@@ -1,7 +1,12 @@
 import React from 'react';
-
+import ActivityCard from './ActivityCard';
 import styles from './ActivityOverviews.module.css'
 
+const dummyEnv = ['Environment1', 'Environment2', 'Environment3', 'Environment4']
+
+const dummyClusters = ['Cluster1', 'Cluster2', 'Cluster3', 'Cluster4']
+
+const dummyTopics = ['Topic1', 'Topic2', 'Topic3', 'Topic4']
 
 const ActivityOverviews = () => {
 
@@ -11,12 +16,16 @@ const ActivityOverviews = () => {
 
             <div className={styles.overview}>
                 Environments
+                <ActivityCard cardData={dummyEnv}/>
+
             </div>
             <div className={styles.overview}>
                 Clusters
+                <ActivityCard cardData={dummyClusters}/>
             </div>
             <div className={styles.overview}>
                 Topics
+                <ActivityCard cardData={dummyTopics}/>
             </div>
             
         </div>
