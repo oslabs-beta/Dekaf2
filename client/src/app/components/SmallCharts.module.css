@@ -4,12 +4,15 @@
 .smallCharts {
     display: flex;
     flex-direction: row;
-    row-gap: 40px;
-    column-gap: 40px;
+    justify-content: space-around;
+
+    /* row-gap: 40px; */
+    column-gap: 30px;
     margin-bottom: 50px;
 }
 
 .leftChart {
+    
     padding: 32px;
     border-radius: 8px;
     background-color: white;
@@ -21,6 +24,8 @@
     border-radius: 8px;
     background-color: white;
     box-shadow: 0px 10px 13px 0px #e9ecef;
+
+
 }
 
 
