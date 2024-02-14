@@ -10,9 +10,9 @@ import { ICluster } from "../KafkaInterfaces";
 import IConfluentAPI from "./IConfluentAPI";
 
 class ConfluentAPI implements IConfluentAPI {
-  authToken: any;
-  constructor(authToken) {
-    this.authToken = authToken;
+  authTokens: { cloudApiToken: string; resourceToken: string };
+  constructor(authTokens) {
+    this.authTokens = authTokens;
   }
 
   async listEnvironments(): Promise<(typeof IEnvironments)[]> {
@@ -21,7 +21,7 @@ class ConfluentAPI implements IConfluentAPI {
         `https://api.confluent.cloud/org/v2/environments`,
         {
           headers: {
-            Authorization: `Basic ${this.authToken}`,
+            Authorization: `Basic ${this.authTokens.cloudApiToken}`,
             "Content-Type": "application/json",
             Accept: "application/json",
           },
@@ -46,7 +46,7 @@ class ConfluentAPI implements IConfluentAPI {
           `https://api.confluent.cloud/cmk/v2/clusters?environment=${environmentIDs[i]}`,
           {
             headers: {
-              Authorization: `Basic ${this.authToken}`,
+              Authorization: `Basic ${this.authTokens.cloudApiToken}`,
               "Content-Type": "application/json",
               Accept: "application/json",
             },
@@ -73,7 +73,7 @@ class ConfluentAPI implements IConfluentAPI {
         `https://api.confluent.cloud/cmk/v3/clusters/${clusterID}/brokers`,
         {
           headers: {
-            Authorization: `Basic ${this.authToken}`,
+            Authorization: `Basic ${this.authTokens.cloudApiToken}`,
             "Content-Type": "application/json",
             Accept: "application/json",
           },
@@ -98,11 +98,15 @@ class ConfluentAPI implements IConfluentAPI {
         const clusterRestEndpoint = clusters[i].spec.http_endpoint;
         const clusterID = clusters[i].id;
         console.log(`clusterRestEndpoint `, clusterRestEndpoint);
+        console.log(
+          `this.authTokens.resourceToken `,
+          this.authTokens.resourceToken
+        );
         const res = await fetch(
           `${clusterRestEndpoint}/kafka/v3/clusters/${clusterID}/topics`,
           {
             headers: {
-              Authorization: `Basic ${this.authToken}`,
+              Authorization: `Basic ${this.authTokens.resourceToken}`,
               "Content-Type": "application/json",
               Accept: "application/json",
             },
@@ -133,7 +137,7 @@ class ConfluentAPI implements IConfluentAPI {
           `https://api.confluent.cloud/cmk/v2/topics/${topic}`,
           {
             headers: {
-              Authorization: `Basic ${this.authToken}`,
+              Authorization: `Basic ${this.authTokens.resourceToken}`,
               "Content-Type": "application/json",
               Accept: "application/json",
             },
@@ -160,7 +164,7 @@ class ConfluentAPI implements IConfluentAPI {
           `https://api.confluent.cloud/cmk/v2/topics/${topic}`,
           {
             headers: {
-              Authorization: `Basic ${this.authToken}`,
+              Authorization: `Basic ${this.authTokens.resourceToken}`,
               "Content-Type": "application/json",
               Accept: "application/json",
             },
