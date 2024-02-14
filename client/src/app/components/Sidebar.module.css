@@ -20,12 +20,13 @@
 
 .link {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-start;
     /* align-items: center; */
     /* left: 50px; */
     width: 100%;
     padding: 8px 24px 8px 40px;
+    gap: 10px;
 
 }
 
