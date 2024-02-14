@@ -7,8 +7,10 @@ const Header = () => {
     return (
 
         <div className={styles.header}>
-            
-            Header here
+            <img className={styles.logo} src="/dekaf-high-resolution-logo-transparent.png" alt="" />
+
+            <div className={styles.userInfo}> User Info</div>
+           
             
         </div>
        
