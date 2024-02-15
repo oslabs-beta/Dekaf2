@@ -1,6 +1,7 @@
 import React from 'react';
 import EnvCard from './EnvCard';
 import ClusterCard from './ClusterCard';
+import TopicCard from './TopicCard';
 import styles from './ActivityOverviews.module.css'
 import { useAppSelector } from '@/store/hooks';
 
@@ -26,7 +27,7 @@ const ActivityOverviews = () => {
             </div>
             <div className={styles.overview}>
                 Topics
-                {/* <ActivityCard cardData={dummyTopics}/> */}
+                <TopicCard cardData={{this: 'is a placeholder'}}/>
             </div>
             
         </div>
