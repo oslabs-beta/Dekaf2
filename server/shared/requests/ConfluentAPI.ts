@@ -181,9 +181,16 @@ class ConfluentAPI implements IConfluentAPI {
     }
     return allTopicsPartitions;
   }
-  async listMessagesFromTopic(topic: string): Promise<(typeof IMessages)[]> {
-    const consumer = new Consumer(topic, "dekaf");
-    // console.log(`consumer `, consumer);
+  async listMessagesFromTopic(
+    kafka_credentials: {
+      kafka_username: string;
+      kafka_password: string;
+    },
+    kafka_bootstrap_server: string,
+    topic: string
+  ): Promise<(typeof IMessages)[]> {
+    const consumer = new Consumer(kafka_credentials, kafka_bootstrap_server);
+    console.log(`consumer `, consumer);
     await consumer.connect();
     await consumer.subscribe(topic);
     const messages = await consumer.run();

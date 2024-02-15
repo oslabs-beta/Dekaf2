@@ -63,7 +63,9 @@ const kafkaController = {
   },
   async getAllTopics(req, res, next) {
     try {
+      console.log(`Getting all topics`);
       const { clusters } = req.body;
+      console.log(`from clusters `, clusters);
       // We need the restEndpoint and clusterID to get all topics
       const topics = await confluentAPI.listTopicsFromClusters(clusters);
       console.log(`topics: `, await topics);
@@ -103,13 +105,29 @@ const kafkaController = {
   async getAllMessages(req, res, next) {
     try {
       //topicID
-      const requestedTopics = req.query.topics;
-      console.log("requestedTopics ", requestedTopics);
+      const requestedClusters = req.body.clusters;
+      const requestedTopics = req.body.topics;
+      const { kafka_credentials } = req.body.kafka_credentials;
+      console.log("requestedClusters: ", requestedClusters[0]);
+      console.log("requestedTopics: ", requestedTopics[0].metadata.self);
+      const myClusters = {};
+      requestedClusters.forEach(
+        (cluster) =>
+          (myClusters[cluster.id] =
+            cluster.spec.kafka_bootstrap_endpoint.replace("SASL_SSL://", ""))
+      );
+
+      // console.log(`myClusters `, myClusters);
       // const allTopics = "";
       const allMessages = [];
       for (let i = 0; i < requestedTopics.length; i++) {
+        let kafka_bootstrap_server = myClusters[requestedTopics[i].cluster_id];
+        let topic = requestedTopics[i].topic_name;
+        console.log("kafka_bootstrap_server ", kafka_bootstrap_server);
         let messages = await confluentAPI.listMessagesFromTopic(
-          requestedTopics[i]
+          kafka_credentials,
+          kafka_bootstrap_server,
+          topic
         );
         allMessages.push(messages);
       }

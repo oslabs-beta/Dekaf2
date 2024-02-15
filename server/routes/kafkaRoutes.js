@@ -42,7 +42,7 @@ router.get(
   }
 );
 
-router.get("/messages", kafkaController.getAllMessages, async (req, res) => {
+router.post("/messages", kafkaController.getAllMessages, async (req, res) => {
   res.status(200).json(res.locals.payload);
 });
 

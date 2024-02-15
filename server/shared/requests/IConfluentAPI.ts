@@ -16,7 +16,11 @@ interface IConfluentAPI {
   listBrokers(clusterID, confluentEnv): Promise<(typeof IBroker)[]>;
   getTopics(topicNames, confluentEnv): Promise<(typeof ITopicDetails)[]>;
   listTopicsFromClusters(clusters: ICluster[]): Promise<(typeof ITopics)[]>;
-  listMessagesFromTopic(topicID): Promise<(typeof IMessages)[]>;
+  listMessagesFromTopic(
+    kafka_credentials,
+    kafka_bootstrap_server,
+    topic
+  ): Promise<(typeof IMessages)[]>;
 }
 
 export default IConfluentAPI;

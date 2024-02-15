@@ -1,9 +1,39 @@
-const kafka = require("./kafka");
+// const kafka = require("./kafka");
+const { Kafka } = require("kafkajs");
+
+// const kafka = new Kafka({
+//   clientId: 'dekaf-data-retrieval',
+//   brokers: [kafka_bootstrap_server],
+//   ssl,
+//   sasl,
+// });
+
+// kafks = {
+//   kafka_bootstrap_server,
+//   kafka_username,
+//   kafka_password
+// }
 
 class Consumer {
-  constructor(topic, groupId) {
-    this.groupId = groupId;
-    this.consumer = kafka.consumer({
+  constructor(kafka_credentials, kafka_bootstrap_server) {
+    this.kafka_username = kafka_credentials.kafka_username;
+    this.kafka_password = kafka_credentials.kafka_password;
+    this.kafka_bootstrap_server = kafka_bootstrap_server;
+    this.sasl =
+      kafka_username && kafka_password
+        ? { kafka_username, kafka_password, mechanism: "plain" }
+        : null;
+    this.ssl = !!sasl;
+
+    this.kafka = new Kafka({
+      clientId: "dekaf-data-retrieval",
+      brokers: [kafka_config.kafka_bootstrap_server],
+      ssl,
+      sasl,
+    });
+
+    this.groupId = "dekaf";
+    this.consumer = this.kafka.consumer({
       groupId: this.groupId,
     });
   }
