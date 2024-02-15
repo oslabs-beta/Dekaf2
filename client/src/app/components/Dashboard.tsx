@@ -1,56 +1,40 @@
-import React from 'react';
+import React from "react";
 
-import SummaryCards from './SummaryCards';
-import MainChart from './MainChart';
-import SmallCharts from './SmallCharts';
+import SummaryCards from "./SummaryCards";
+import MainChart from "./MainChart";
+import SmallCharts from "./SmallCharts";
 
-import ActivityOverviews from './ActivityOverviews';
+import ActivityOverviews from "./ActivityOverviews";
 
-import styles from './Dashboard.module.css';
+import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
-
-    return (
-
-        <div className={styles.dashboard}>
-            <div className={styles.header}>
-
-                <div className={styles.headerBox}>
-                    <div className={styles.headerBigText}>
-                        Hello Cheney!
-                    </div>
-                    <div className={styles.headerSmallText}>
-                        We are on a mission to help developers like you to maintain resilient Kafka Applications
-                    </div>
-                </div>
-            
-            </div>
-
-            
-                <SummaryCards />
-            
-                
-            
-            <div className={styles.belowSummaryCards}>
-                <div className={styles.charts}>
-                
-                    <MainChart />
-                
-
-               
-                    <SmallCharts />
-                
-
-                    </div>
-                    
-                    <ActivityOverviews />
-            </div>
-          
-
+  const displayName =
+    localStorage.getItem("displayName")?.split(" ")[0] || null;
+  return (
+    <div className={styles.dashboard}>
+      <div className={styles.header}>
+        <div className={styles.headerBox}>
+          <div className={styles.headerBigText}>Hello {displayName}!</div>
+          <div className={styles.headerSmallText}>
+            We are on a mission to help developers like you to maintain
+            resilient Kafka Applications
+          </div>
         </div>
-       
-    )
+      </div>
 
-}
+      <SummaryCards />
 
-export default Dashboard
+      <div className={styles.belowSummaryCards}>
+        <div className={styles.charts}>
+          <MainChart />
+
+          <SmallCharts />
+        </div>
+
+        <ActivityOverviews />
+      </div>
+    </div>
+  );
+};
+export default Dashboard;

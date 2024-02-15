@@ -6,6 +6,8 @@ const {
   ITopics,
 } = require("../KafkaInterfaces");
 
+const Consumer = require("../../services/kafka/consumer");
+
 import { ICluster } from "../KafkaInterfaces";
 import IConfluentAPI from "./IConfluentAPI";
 
@@ -179,8 +181,14 @@ class ConfluentAPI implements IConfluentAPI {
     }
     return allTopicsPartitions;
   }
-  listMessagesFromTopic(topicID: string): Promise<(typeof IMessages)[]> {
-    return;
+  async listMessagesFromTopic(topic: string): Promise<(typeof IMessages)[]> {
+    const consumer = new Consumer(topic, "dekaf");
+    // console.log(`consumer `, consumer);
+    await consumer.connect();
+    await consumer.subscribe(topic);
+    const messages = await consumer.run();
+
+    return messages;
   }
 }
 

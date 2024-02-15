@@ -5,7 +5,7 @@ import ProductCard from "./components/ProductCard";
 import MainContainer from "./components/MainContainer";
 import Header from "./components/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState, createContext } from "react";
 import {
   fetchEnvironments,
   selectAllEnvironments,
@@ -14,6 +14,8 @@ import { fetchClusters, selectAllClusters } from "./slices/clustersSlice";
 import { fetchTopics, selectAllTopics } from "./slices/topicsSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchMessages } from "./slices/messagesSlice";
+
+import { AuthProvider } from "./login/auth";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -47,8 +49,6 @@ export default function Home() {
     }
   }, []);
 
-
-
   // //Clusters & topics datafetching
   // const clusters = useSelector(selectAllClusters);
   // useEffect(() => {
@@ -61,12 +61,14 @@ export default function Home() {
   // }, [clusters.status]);
 
   return (
-    <main>
-      {/* <h1>Log In</h1> */}
-      {/* <Link href='/users'> Users </Link>
+    <AuthProvider>
+      <main>
+        {/* <h1>Log In</h1> */}
+        {/* <Link href='/users'> Users </Link>
       <ProductCard /> */}
-      <Header />
-      <MainContainer />
-    </main>
+        <Header />
+        <MainContainer />
+      </main>
+    </AuthProvider>
   );
 }
