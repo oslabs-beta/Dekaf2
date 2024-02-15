@@ -17,7 +17,7 @@ const Dashboard = () => {
 
                 <div className={styles.headerBox}>
                     <div className={styles.headerBigText}>
-                        Hello Cheney !
+                        Hello Cheney!
                     </div>
                     <div className={styles.headerSmallText}>
                         We are on a mission to help developers like you to maintain resilient Kafka Applications
@@ -26,9 +26,9 @@ const Dashboard = () => {
             
             </div>
 
-            <div>
+            
                 <SummaryCards />
-            </div>
+            
                 
            
             <div className={styles.belowSummaryCards}>
