@@ -3,7 +3,9 @@ import React from "react";
 import styles from "./Header.module.css";
 
 const Header = () => {
-  const photoURL = localStorage.getItem("PhotoURL") || null;
+  const photoURL = localStorage.getItem("PhotoURL") || '';
+  const displayName =  localStorage.getItem("displayName") || '';
+  console.log(displayName)
   return (
     <div className={styles.header}>
       <img
@@ -11,8 +13,8 @@ const Header = () => {
         src="/dekaf-high-resolution-logo-transparent.png"
         alt=""
       />
-      <img src={photoURL} />
-      <div className={styles.userInfo}> User Info</div>
+      
+      <div className={styles.userInfo}> <img className={styles.profilePic} src={photoURL} /> </div>
     </div>
   );
 };
