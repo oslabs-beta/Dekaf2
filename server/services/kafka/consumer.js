@@ -39,7 +39,7 @@ class Consumer {
     try {
       await this.consumer.subscribe({
         topic: topic,
-        fromBeginning: true,
+        fromBeginning: false, //starts on the end
       });
     } catch (error) {
       console.error("Error subscribing to consumer", error);

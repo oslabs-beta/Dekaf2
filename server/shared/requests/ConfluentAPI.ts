@@ -181,6 +181,37 @@ class ConfluentAPI implements IConfluentAPI {
     }
     return allTopicsPartitions;
   }
+
+  // async countMessagesFromTopic(kafka, topic) {
+  //   const consumerPromises = [];
+
+  //   const consumerCount = 4; // Example: Use 4 consumers
+
+  //   for (let i = 0; i < consumerCount; i++) {
+  //     const consumer = kafka.consumer({ groupId: `group-${i}` });
+  //     consumer.connect().then(() => {
+  //       consumer.subscribe({ topic, fromBeginning: false });
+  //       consumer.run({
+  //         eachMessage: async () => {
+  //           // Do nothing, just consume messages to count them
+  //         },
+  //       });
+  //     });
+  //     consumerPromises.push(consumer);
+  //   }
+
+  //   await Promise.all(consumerPromises.map((consumer) => consumer.consume()));
+
+  //   let totalMessageCount = 0;
+  //   for (const consumer of consumerPromises) {
+  //     const { committed } = await consumer.position({ topic });
+  //     totalMessageCount += committed;
+  //     await consumer.disconnect();
+  //   }
+
+  //   console.log(`Total messages in topic ${topic}: ${totalMessageCount}`);
+  // }
+
   async listMessagesFromTopic(
     kafka_credentials: IKafkaCredentials,
     kafka_bootstrap_server: string,
@@ -197,10 +228,8 @@ class ConfluentAPI implements IConfluentAPI {
             mechanism: "plain",
           }
         : null;
-    //username && password ? { username, password, mechanism: "plain" } : null;
-    const ssl = !!sasl;
 
-    console.log(`sasl is: `, sasl);
+    const ssl = !!sasl;
     const kafka = new Kafka({
       clientId: "dekaf",
       brokers: [kafka_bootstrap_server],
@@ -208,22 +237,21 @@ class ConfluentAPI implements IConfluentAPI {
       sasl,
     });
 
-    // console.log(
-    //   "listMessagesFromTopic | kafka_credentials ",
-    //   kafka_credentials
-    console.log(`kafka is `, kafka);
-    // );
+    //Instantiates new consumer
     const consumer = new Consumer(
       kafka,
       kafka_credentials,
       kafka_bootstrap_server
     );
-    console.log(`consumer `, consumer);
+    // let count = await this.countMessagesFromTopic(kafka, topic);
+    // console.log(`count is `, count);
     await consumer.connect();
     await consumer.subscribe(topic);
     const messages = await consumer.run();
+    // console.log(`Messages: `, messages);
+    // const offsets = await consumer.position([{ topic, partition }]);
 
-    return messages;
+    return;
   }
 }
 

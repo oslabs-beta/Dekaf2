@@ -108,8 +108,8 @@ const kafkaController = {
       const requestedClusters = req.body.clusters;
       const requestedTopics = req.body.topics;
       const { kafka_credentials } = req.body;
-      console.log("requestedClusters: ", requestedClusters[0]);
-      console.log("requestedTopics: ", requestedTopics[0].metadata.self);
+      // console.log("requestedClusters: ", requestedClusters[0]);
+      // console.log("requestedTopics: ", requestedTopics[0].metadata.self);
       const myClusters = {};
       requestedClusters.forEach(
         (cluster) =>
