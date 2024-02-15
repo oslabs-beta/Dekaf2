@@ -2,7 +2,8 @@
 import React from "react";
 import { loginWithGithub } from "../login/firebase";
 import { redirect } from "next/navigation";
-// import { useRouter } from 'next/router';
+import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
 // Inside your component or function
 // const { push } = useRouter();
@@ -12,9 +13,15 @@ import { redirect } from "next/navigation";
 //import styles from './ProductCard.module.css';
 
 const LoginContainer = () => {
+  const router = useRouter();
   const loginHandler = async () => {
     const user = loginWithGithub();
     console.log("this is user", await user);
+    setTimeout(() => {
+      router.push('/');
+    }, 1000);
+    
+    
     // redirect('/users')
     // push('/users');
   };
