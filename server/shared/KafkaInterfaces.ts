@@ -63,27 +63,7 @@ export interface IBroker {
 
 export interface IClusterDTO {}
 
-export interface ITopics {
-  kind: string;
-  metadata: {
-    self: string;
-    resource_name: string;
-  };
-  cluster_id: string;
-  topic_name: string;
-  is_internal: boolean;
-  replication_factor: number;
-  partitions_count: number;
-  partitions: {
-    related: string;
-  };
-  configs: {
-    related: string;
-  };
-  partition_reassignments: {
-    related: string;
-  };
-}
+export interface ITopic {}
 
 export interface ITopicDetails {
   name: string;
