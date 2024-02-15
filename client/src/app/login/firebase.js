@@ -1,5 +1,6 @@
 //Config
-import { app } from "firebase/app";
+import { app, initializeApp } from "firebase/app";
+import "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDwfpe7ovv5O6br2JSjpXGkiFiKNTmgts4",
@@ -9,8 +10,12 @@ const firebaseConfig = {
   messagingSenderId: "638714443521",
   appId: "1:638714443521:web:ac33a5c9bff22201830d00",
 };
+console.log("app ", app);
+const firebase = initializeApp(firebaseConfig);
+export const auth = getAuth(firebase);
 
-export const firebase = auth.initializeApp(firebaseConfig);
+// const firebase = initializeApp(firebaseConfig);
+export default firebase;
 
 // Github Provied
 // import { GithubAuthProvider } from "firebase/auth";
@@ -31,7 +36,7 @@ export async function loginWithGithub() {
       localStorage.setItem("displayName", result.user.displayName);
       localStorage.setItem("email", result.user.email);
       localStorage.setItem("PhotoURL", result.user.photoURL);
-      console.log(`GOT `, localStorage.getItem(displayName));
+      console.log(localStorage.getItem);
       const credential = GithubAuthProvider.credentialFromResult(result);
 
       credential.setCustomParameters({
