@@ -80,7 +80,7 @@ export const selectAllTopics = (state: RootState) => state.topics;
 
 /*-------------------//     The Asynkthunks helps us to deal with async
 //   ASYNC THUNKS    //     requests inside our reducer letting us
-//-------------------/     have methods to fetch data and update the state*/
+//-------------------/      have methods to fetch data and update the state*/
 
 export const fetchTopics = createAsyncThunk("topics/fetchTopics", async () => {
   try {

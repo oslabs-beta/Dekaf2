@@ -103,6 +103,17 @@ const kafkaController = {
   async getAllMessages(req, res, next) {
     try {
       //topicID
+      const requestedTopics = req.query.topics;
+      console.log("requestedTopics ", requestedTopics);
+      // const allTopics = "";
+      const allMessages = [];
+      for (let i = 0; i < requestedTopics.length; i++) {
+        let messages = await confluentAPI.listMessagesFromTopic(
+          requestedTopics[i]
+        );
+        allMessages.push(messages);
+      }
+      res.locals.payload = allMessages;
       next();
     } catch (e) {
       console.log(`Error on kafkaController.getAllMessages: `, e);
