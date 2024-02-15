@@ -11,7 +11,7 @@ const MainContainer = () => {
         <div className={styles.mainContainer}>
             <Sidebar />
             <Dashboard />
-            <ActivityOverviews /> 
+            
             
         </div>
        

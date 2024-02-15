@@ -30,8 +30,9 @@ const Dashboard = () => {
                 <SummaryCards />
             
                 
-           
+            
             <div className={styles.belowSummaryCards}>
+                <div className={styles.charts}>
                 
                     <MainChart />
                 
@@ -40,10 +41,11 @@ const Dashboard = () => {
                     <SmallCharts />
                 
 
-                
+                    </div>
+                    
                     <ActivityOverviews />
-                
             </div>
+          
 
         </div>
        
