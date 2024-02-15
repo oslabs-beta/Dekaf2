@@ -1,11 +1,12 @@
 
 
 .activityOverviews {
-   
+    position: relative;
+    
     display: flex;
     flex-direction: column;
     row-gap: 24px;
-    width: 30rem
+    width: 25rem
 }
 
 
