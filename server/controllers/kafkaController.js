@@ -107,7 +107,7 @@ const kafkaController = {
       //topicID
       const requestedClusters = req.body.clusters;
       const requestedTopics = req.body.topics;
-      const { kafka_credentials } = req.body.kafka_credentials;
+      const { kafka_credentials } = req.body;
       console.log("requestedClusters: ", requestedClusters[0]);
       console.log("requestedTopics: ", requestedTopics[0].metadata.self);
       const myClusters = {};
@@ -117,13 +117,11 @@ const kafkaController = {
             cluster.spec.kafka_bootstrap_endpoint.replace("SASL_SSL://", ""))
       );
 
-      // console.log(`myClusters `, myClusters);
-      // const allTopics = "";
       const allMessages = [];
       for (let i = 0; i < requestedTopics.length; i++) {
         let kafka_bootstrap_server = myClusters[requestedTopics[i].cluster_id];
         let topic = requestedTopics[i].topic_name;
-        console.log("kafka_bootstrap_server ", kafka_bootstrap_server);
+
         let messages = await confluentAPI.listMessagesFromTopic(
           kafka_credentials,
           kafka_bootstrap_server,

@@ -7,6 +7,7 @@ const {
   IEnvironments,
   IBroker,
   ITopicDetails,
+  IKafkaCredentials,
 } = require("../KafkaInterfaces");
 
 interface IConfluentAPI {
@@ -17,7 +18,8 @@ interface IConfluentAPI {
   getTopics(topicNames, confluentEnv): Promise<(typeof ITopicDetails)[]>;
   listTopicsFromClusters(clusters: ICluster[]): Promise<(typeof ITopics)[]>;
   listMessagesFromTopic(
-    kafka_credentials,
+    kafka,
+    kafka_credentials: typeof IKafkaCredentials,
     kafka_bootstrap_server,
     topic
   ): Promise<(typeof IMessages)[]>;

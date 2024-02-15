@@ -5,10 +5,10 @@ const {
   IMessages,
   ITopics,
 } = require("../KafkaInterfaces");
-
+const { Kafka } = require("kafkajs");
 const Consumer = require("../../services/kafka/consumer");
 
-import { ICluster } from "../KafkaInterfaces";
+import { ICluster, IKafkaCredentials } from "../KafkaInterfaces";
 import IConfluentAPI from "./IConfluentAPI";
 
 class ConfluentAPI implements IConfluentAPI {
@@ -182,14 +182,42 @@ class ConfluentAPI implements IConfluentAPI {
     return allTopicsPartitions;
   }
   async listMessagesFromTopic(
-    kafka_credentials: {
-      kafka_username: string;
-      kafka_password: string;
-    },
+    kafka_credentials: IKafkaCredentials,
     kafka_bootstrap_server: string,
     topic: string
   ): Promise<(typeof IMessages)[]> {
-    const consumer = new Consumer(kafka_credentials, kafka_bootstrap_server);
+    console.log("kafka_credentials ", kafka_credentials);
+
+    //Create instance of kafka connection
+    const sasl =
+      kafka_credentials.kafka_username && kafka_credentials.kafka_password
+        ? {
+            username: kafka_credentials.kafka_username,
+            password: kafka_credentials.kafka_password,
+            mechanism: "plain",
+          }
+        : null;
+    //username && password ? { username, password, mechanism: "plain" } : null;
+    const ssl = !!sasl;
+
+    console.log(`sasl is: `, sasl);
+    const kafka = new Kafka({
+      clientId: "dekaf",
+      brokers: [kafka_bootstrap_server],
+      ssl,
+      sasl,
+    });
+
+    // console.log(
+    //   "listMessagesFromTopic | kafka_credentials ",
+    //   kafka_credentials
+    console.log(`kafka is `, kafka);
+    // );
+    const consumer = new Consumer(
+      kafka,
+      kafka_credentials,
+      kafka_bootstrap_server
+    );
     console.log(`consumer `, consumer);
     await consumer.connect();
     await consumer.subscribe(topic);

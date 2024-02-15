@@ -11,6 +11,10 @@ export interface IEnvironments {
   };
 }
 
+export interface IKafkaCredentials {
+  kafka_username: string;
+  kafka_password: string;
+}
 export interface ICluster {
   api_version: string;
   id: string;
