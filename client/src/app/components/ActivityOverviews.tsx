@@ -1,31 +1,33 @@
 import React from 'react';
-import ActivityCard from './ActivityCard';
+import EnvCard from './EnvCard';
+import ClusterCard from './ClusterCard';
+import TopicCard from './TopicCard';
 import styles from './ActivityOverviews.module.css'
-
-const dummyEnv = ['Environment1', 'Environment2', 'Environment3', 'Environment4']
-
-const dummyClusters = ['Cluster1', 'Cluster2', 'Cluster3', 'Cluster4']
-
-const dummyTopics = ['Topic1', 'Topic2', 'Topic3', 'Topic4']
+import { useAppSelector } from '@/store/hooks';
 
 const ActivityOverviews = () => {
-
+    
+    const environments = useAppSelector((state) => state.environments.data)
+    const cluster = useAppSelector((state) => state.clusters.data)
+    console.log('this is cluster',cluster)
+    
+    console.log(environments)
     return (
 
         <div className={styles.activityOverviews}>
 
             <div className={styles.overview}>
                 Environments
-                <ActivityCard cardData={dummyEnv}/>
+                <EnvCard cardData={environments}/>
 
             </div>
             <div className={styles.overview}>
                 Clusters
-                <ActivityCard cardData={dummyClusters}/>
+                <ClusterCard cardData={cluster}/>
             </div>
             <div className={styles.overview}>
                 Topics
-                <ActivityCard cardData={dummyTopics}/>
+                <TopicCard cardData={{this: 'is a placeholder'}}/>
             </div>
             
         </div>

@@ -11,7 +11,7 @@ const MainChart = () => {
 
     const chartData = {
         
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August'],
+    labels: [ 'July', 'August', 'September','October','November','December','January', 'February'],
     datasets: [
         {
         label: 'Sales',

@@ -1,27 +1,29 @@
 
 
 .dashboard {
-    margin-left: 250px;
+    margin-left: 240px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     /* align-items: center; */
     row-gap: 30px;
     height: 450px;
-    min-width: 90%;
+   
     max-width: 100%;
 
 }
 
 .header {
     width: 1663px;
-    height: 276px;
+    height: 300px;
     padding-top: 7%;
+    
     border-radius: 0px 0px 16px 16px;
     background: radial-gradient(36.28% 150.93% at 50% 50%, #3B8AFF 0%, #0048B2 100%);
 }
 
 .headerBox {
+    height: 200px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -30,6 +32,7 @@
 
 .headerBigText {
     /* font-family: Inter; */
+    margin: 0px 40px 0;
     font-size: 40px;
     font-style: normal;
     font-weight: 700;
@@ -46,11 +49,17 @@
     line-height: 130%;
     color: #FFFFFF;
     padding: 10px;
+    margin-left: 35px;
 }
-
-.belowSummaryCards {
+.charts {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding-left: 50px;
+}
+
+.belowSummaryCards {
+    display: flex;
+    gap: 1rem;
+    
 }

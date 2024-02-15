@@ -36,7 +36,7 @@ const barData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
       {
-        label: 'Sales',
+        label: 'Messages',
         data: [65, 59, 80, 81, 56, 55, 40],
         fill: true,
         borderColor: 'rgb(75, 192, 192)',

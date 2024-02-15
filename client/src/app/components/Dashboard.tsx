@@ -23,19 +23,18 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div>
-        <SummaryCards />
-      </div>
+      <SummaryCards />
 
       <div className={styles.belowSummaryCards}>
-        <MainChart />
+        <div className={styles.charts}>
+          <MainChart />
 
-        <SmallCharts />
+          <SmallCharts />
+        </div>
 
         <ActivityOverviews />
       </div>
     </div>
   );
 };
-
 export default Dashboard;

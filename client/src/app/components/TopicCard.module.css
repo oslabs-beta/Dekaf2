@@ -1,0 +1,19 @@
+
+.activityList {
+    margin-top: 1rem;
+    max-height: 250px;
+    overflow: auto;
+  
+  }
+  
+  .listItem{
+      /* color: aqua; */
+      padding: 0.5rem;
+  }
+  
+  .lastUpdated {
+    font-size: .8rem;
+    color: rgb(193, 193, 193);
+  }
+  
+  
