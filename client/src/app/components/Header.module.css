@@ -32,6 +32,13 @@
 .userInfo {
     display: flex;
     position: relative;
-    left: 85%;
-    margin: auto 20px;
+    left: 90%;
+    margin: auto 10px;
+}
+
+
+.profilePic {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
 }
