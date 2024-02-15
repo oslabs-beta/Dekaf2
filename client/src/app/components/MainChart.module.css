@@ -3,7 +3,7 @@
 .mainChart {
     display: flex;
     flex-direction: column;
-    
+    border-radius: 8px;
     width: 1064px;
     padding: 24px;
     gap: 24px;

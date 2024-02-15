@@ -1,5 +1,6 @@
 // components/BarChart.js
 import React from "react";
+import styles from './Charts.module.css'
 import { Bar } from "react-chartjs-2";
 import {
     Chart as ChartJS,
@@ -28,14 +29,17 @@ export const BarChart = ({ chartData }: BarChartProps) => {
 
   return (
     <div className="chart-container">
-      <h2 style={{ textAlign: "center" }}>Cluster Errors</h2>
+      <h2 style={{ textAlign: "center" }}></h2>
       <Bar
+        className={styles.barChart}
         data={chartData}
         options={{
+          responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             title: {
               display: true,
-              text: "Wow you have so many!"
+              // text: "Wow you have so many!"
             },
             legend: {
               display: false
