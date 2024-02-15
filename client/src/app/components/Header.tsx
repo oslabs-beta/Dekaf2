@@ -11,7 +11,7 @@ const Header = () => {
         src="/dekaf-high-resolution-logo-transparent.png"
         alt=""
       />
-      {/* <img src={photoURL} /> */}
+      <img src={photoURL} />
       <div className={styles.userInfo}> User Info</div>
     </div>
   );
